@@ -1,0 +1,4156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Travel vocabulary</title>
+    <style>
+        body {
+            font-family: Times New Roman, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .language-selectors {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: #7ccbff;
+            flex-wrap: wrap;
+            position: sticky;        /* Липкое позиционирование */
+            top: 0;                 /* Прилипает к верхнему краю */
+            z-index: 1000;          /* Поверх других элементов */
+			padding: 10px 0px 10px 0px;          /* Добавим отступы для красоты */
+            margin-bottom: 10px;    /* Отступ снизу */
+            box-shadow: 0 2px 10px #4b79978c; /* Тень при прокрутке */
+        }
+        .language-selector {
+            text-align: center;
+        }
+        .language-selector label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        select {
+			font-family: Times New Roman, sans-serif;
+            padding: 10px 15px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            min-width: 180px;
+        }
+        select:hover {
+            border-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        th {
+            background-color: #2dabff;
+            color: white;
+            padding: 5px 15px;
+            text-align: left;
+        }
+        td {
+            padding: 3px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .empty-row td {
+            padding: 8px;
+            background-color: #f5f5f5;
+        }
+        .double-empty-row td {
+            padding: 8px;
+            background-color: #7ccbff;
+        }
+        .footer-minimal {
+            margin-top: 30px;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+			color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Travel vocabulary</h1>
+    
+    <div class="language-selectors">
+        <div class="language-selector">
+            <select id="left-language"></select>
+        </div>     
+        <div class="language-selector">
+            <select id="center-language"></select>
+        </div>	
+        <div class="language-selector">
+            <select id="right-language"></select>
+        </div>
+    </div>
+
+    <!-- JSON данные прямо в HTML -->
+    <script type="application/json" id="dictionary-json">
+    {
+        "languages": {
+            "ru": "Русский",
+            "en": "Английский",
+            "fr": "Французский",
+			"de": "Немецкий",
+			"es": "Испанский",
+			"cn": "Китайский",
+			"ar": "Арабский"
+        },
+        "words": [
+			{
+				"ru": "Земля",
+				"en": "Ground",
+				"fr": "Terre (f)",
+				"de": "Erde (f)",
+				"es": "Tierra (f)",
+				"cn": "地球 (dìqiú)",
+				"ar": "أرض (ʾarḍ)"
+			},
+			{
+				"ru": "Небо",
+				"en": "Sky",
+				"fr": "Ciel (m)",
+				"de": "Himmel (m)",
+				"es": "Cielo (m)",
+				"cn": "天空 (tiānkōng)",
+				"ar": "سماء (samāʾ)"
+			},
+			{
+				"ru": "Воздух",
+				"en": "Air",
+				"fr": "Air (m)",
+				"de": "Luft (f)",
+				"es": "Aire (m)",
+				"cn": "空气 (kōngqì)",
+				"ar": "هواء (hawāʾ)"
+			},
+			{
+				"ru": "Вода",
+				"en": "Water",
+				"fr": "Eau (f)",
+				"de": "Wasser (n)",
+				"es": "Agua (f)",
+				"cn": "水 (shuǐ)",
+				"ar": "ماء (māʾ)"
+			},
+			{
+				"ru": "Огонь",
+				"en": "Fire",
+				"fr": "Feu (m)",
+				"de": "Feuer (n)",
+				"es": "Fuego (m)",
+				"cn": "火 (huǒ)",
+				"ar": "نار (nār)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Мужчина",
+				"en": "Man",
+				"fr": "Homme (m)",
+				"de": "Mann (m)",
+				"es": "Hombre (m)",
+				"cn": "男人 (nánrén)",
+				"ar": "رجل (rajul)"
+			},
+			{
+				"ru": "Женщина",
+				"en": "Woman",
+				"fr": "Femme (f)",
+				"de": "Frau (f)",
+				"es": "Mujer (f)",
+				"cn": "女人 (nǚrén)",
+				"ar": "امرأة (imraʾa)"
+			},
+			{
+				"ru": "Семья",
+				"en": "Family",
+				"fr": "Famille (f)",
+				"de": "Familie (f)",
+				"es": "Familia (f)",
+				"cn": "家庭 (jiātíng)",
+				"ar": "عائلة (ʿāʾila)"
+			},
+			{
+				"ru": "Мать",
+				"en": "Mother",
+				"fr": "Mère (f)",
+				"de": "Mutter (f)",
+				"es": "Madre (f)",
+				"cn": "母亲 (mǔqīn)",
+				"ar": "أم (ʾumm)"
+			},
+			{
+				"ru": "Отец",
+				"en": "Father",
+				"fr": "Père (m)",
+				"de": "Vater (m)",
+				"es": "Padre (m)",
+				"cn": "父亲 (fùqīn)",
+				"ar": "أب (ʾab)"
+			},
+			{
+				"ru": "Брат",
+				"en": "Brother",
+				"fr": "Frère (m)",
+				"de": "Bruder (m)",
+				"es": "Hermano (m)",
+				"cn": "兄弟 (xiōngdì)",
+				"ar": "أخ (ʾaḫ)"
+			},
+			{
+				"ru": "Сестра",
+				"en": "Sister",
+				"fr": "Sœur (f)",
+				"de": "Schwester (f)",
+				"es": "Hermana (f)",
+				"cn": "姐妹 (jiěmèi)",
+				"ar": "أخت (ʾuḫt)"
+			},
+			{
+				"ru": "Ребенок",
+				"en": "Child",
+				"fr": "Enfant (m/f)",
+				"de": "Kind (n)",
+				"es": "Niño (m)",
+				"cn": "孩子 (háizi)",
+				"ar": "طفل (ṭifl)"
+			},
+			{
+				"ru": "Муж",
+				"en": "Husband",
+				"fr": "Mari (m)",
+				"de": "Ehemann (m)",
+				"es": "Esposo (m)",
+				"cn": "丈夫 (zhàngfū)",
+				"ar": "زوج (zawj)"
+			},
+			{
+				"ru": "Жена",
+				"en": "Wife",
+				"fr": "Femme (f)",
+				"de": "Ehefrau (f)",
+				"es": "Esposa (f)",
+				"cn": "妻子 (qīzǐ)",
+				"ar": "زوجة (zawja)"
+			},
+			{
+				"ru": "Имя",
+				"en": "Name",
+				"fr": "Nom (m)",
+				"de": "Name (m)",
+				"es": "Nombre (m)",
+				"cn": "名字 (míngzi)",
+				"ar": "اسم (ism)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Животное",
+				"en": "Animal",
+				"fr": "Animal (m)",
+				"de": "Tier (n)",
+				"es": "Animal (m)",
+				"cn": "动物 (dòngwù)",
+				"ar": "حيوان (ḥayawān)"
+			},
+			{
+				"ru": "Собака",
+				"en": "Dog",
+				"fr": "Chien (m)",
+				"de": "Hund (m)",
+				"es": "Perro (m)",
+				"cn": "狗 (gǒu)",
+				"ar": "كلب (kalb)"
+			},
+			{
+				"ru": "Кошка",
+				"en": "Cat",
+				"fr": "Chat (m)",
+				"de": "Katze (f)",
+				"es": "Gato (m)",
+				"cn": "猫 (māo)",
+				"ar": "قطة (qiṭṭa)"
+			},
+			{
+				"ru": "Птица",
+				"en": "Bird",
+				"fr": "Oiseau (m)",
+				"de": "Vogel (m)",
+				"es": "Pájaro (m)",
+				"cn": "鸟 (niǎo)",
+				"ar": "طائر (ṭāʾir)"
+			},
+			{
+				"ru": "Лошадь",
+				"en": "Horse",
+				"fr": "Cheval (m)",
+				"de": "Pferd (n)",
+				"es": "Caballo (m)",
+				"cn": "马 (mǎ)",
+				"ar": "حصان (ḥiṣān)"
+			},
+			{
+				"ru": "Насекомое",
+				"en": "Insect",
+				"fr": "Insecte (m)",
+				"de": "Insekt (n)",
+				"es": "Insecto (m)",
+				"cn": "昆虫 (kūnchóng)",
+				"ar": "حشرة (ḥašara)"
+			},
+			{
+				"ru": "Дерево",
+				"en": "Tree",
+				"fr": "Arbre (m)",
+				"de": "Baum (m)",
+				"es": "Árbol (m)",
+				"cn": "树 (shù)",
+				"ar": "شجرة (šajara)"
+			},
+			{
+				"ru": "Трава",
+				"en": "Grass",
+				"fr": "Herbe (f)",
+				"de": "Gras (n)",
+				"es": "Hierba (f)",
+				"cn": "草 (cǎo)",
+				"ar": "عشب (ʿušb)"
+			},
+			{
+				"ru": "Цветок",
+				"en": "Flower",
+				"fr": "Fleur (f)",
+				"de": "Blume (f)",
+				"es": "Flor (f)",
+				"cn": "花 (huā)",
+				"ar": "زهرة (zahra)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Много",
+				"en": "Many / a lot of",
+				"fr": "Beaucoup",
+				"de": "Viel",
+				"es": "Mucho",
+				"cn": "很多 (hěnduō)",
+				"ar": "كثير (kaṯīr)"
+			},
+			{
+				"ru": "Мало",
+				"en": "Few",
+				"fr": "Peu",
+				"de": "Wenig",
+				"es": "Poco",
+				"cn": "很少 (hěnshǎo)",
+				"ar": "قليل (qalīl)"
+			},
+			{
+				"ru": "Больше",
+				"en": "More",
+				"fr": "Plus",
+				"de": "Mehr",
+				"es": "Más",
+				"cn": "更多 (gèngduō)",
+				"ar": "أكثر (ʾakṯar)"
+			},
+			{
+				"ru": "Меньше",
+				"en": "Less",
+				"fr": "Moins",
+				"de": "Weniger",
+				"es": "Menos",
+				"cn": "更少 (gèngshǎo)",
+				"ar": "أقل (ʾaqal)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Вид",
+				"en": "Sight",
+				"fr": "Vue (f)",
+				"de": "Sicht (f)",
+				"es": "Vista (f)",
+				"cn": "视觉 (shìjué)",
+				"ar": "بصر (baṣar)"
+			},
+			{
+				"ru": "Звук",
+				"en": "Sound",
+				"fr": "Son (m)",
+				"de": "Klang (m)",
+				"es": "Sonido (m)",
+				"cn": "声音 (shēngyīn)",
+				"ar": "صوت (ṣawt)"
+			},
+			{
+				"ru": "Запах",
+				"en": "Smell",
+				"fr": "Odeur (f)",
+				"de": "Geruch (m)",
+				"es": "Olor (m)",
+				"cn": "气味 (qìwèi)",
+				"ar": "رائحة (rāʾiḥa)"
+			},
+			{
+				"ru": "Вкус",
+				"en": "Taste",
+				"fr": "Goût (m)",
+				"de": "Geschmack (m)",
+				"es": "Gusto (m)",
+				"cn": "味道 (wèidào)",
+				"ar": "طعم (ṭaʿm)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Теплый",
+				"en": "Warm",
+				"fr": "Chaud",
+				"de": "Warm",
+				"es": "Cálido",
+				"cn": "暖和 (nuǎnhuo)",
+				"ar": "دافئ (dāfiʾ)"
+			},
+			{
+				"ru": "Холодный",
+				"en": "Cold",
+				"fr": "Froid",
+				"de": "Kalt",
+				"es": "Frío",
+				"cn": "冷 (lěng)",
+				"ar": "بارد (bārid)"
+			},
+			{
+				"ru": "Старый",
+				"en": "Old",
+				"fr": "Vieux",
+				"de": "Alt",
+				"es": "Viejo",
+				"cn": "旧 (jiù)",
+				"ar": "قديم (qadīm)"
+			},
+			{
+				"ru": "Новый",
+				"en": "New",
+				"fr": "Nouveau",
+				"de": "Neu",
+				"es": "Nuevo",
+				"cn": "新 (xīn)",
+				"ar": "جديد (jadīd)"
+			},
+			{
+				"ru": "Далекий",
+				"en": "Far",
+				"fr": "Loin",
+				"de": "Weit",
+				"es": "Lejano",
+				"cn": "远 (yuǎn)",
+				"ar": "بعيد (baʿīd)"
+			},
+			{
+				"ru": "Близкий",
+				"en": "Near",
+				"fr": "Proche",
+				"de": "Nah",
+				"es": "Cercano",
+				"cn": "近 (jìn)",
+				"ar": "قريب (qarīb)"
+			},
+			{
+				"ru": "Высокий",
+				"en": "High",
+				"fr": "Haut",
+				"de": "Hoch",
+				"es": "Alto",
+				"cn": "高 (gāo)",
+				"ar": "عال (ʿāl)"
+			},
+			{
+				"ru": "Низкий",
+				"en": "Low",
+				"fr": "Bas",
+				"de": "Niedrig",
+				"es": "Bajo",
+				"cn": "低 (dī)",
+				"ar": "منخفض (munḫafiḍ)"
+			},
+			{
+				"ru": "Светлый",
+				"en": "Light",
+				"fr": "Clair",
+				"de": "Hell",
+				"es": "Claro",
+				"cn": "亮 (liàng)",
+				"ar": "فاتح (fātiḥ)"
+			},
+			{
+				"ru": "Темный",
+				"en": "Dark",
+				"fr": "Foncé",
+				"de": "Dunkel",
+				"es": "Oscuro",
+				"cn": "暗 (àn)",
+				"ar": "داكن (dākin)"
+			},
+			{
+				"ru": "Чистый",
+				"en": "Clean",
+				"fr": "Propre",
+				"de": "Sauber",
+				"es": "Limpio",
+				"cn": "干净 (gānjìng)",
+				"ar": "نظيف (naẓīf)"
+			},
+			{
+				"ru": "Грязный",
+				"en": "Dirty",
+				"fr": "Sale",
+				"de": "Schmutzig",
+				"es": "Sucio",
+				"cn": "脏 (zāng)",
+				"ar": "قذر (qaḏir)"
+			},
+			{
+				"ru": "Хороший",
+				"en": "Good",
+				"fr": "Bon",
+				"de": "Gut",
+				"es": "Bueno",
+				"cn": "好 (hǎo)",
+				"ar": "جيد (jayyid)"
+			},
+			{
+				"ru": "Плохой",
+				"en": "Bad",
+				"fr": "Mauvais",
+				"de": "Schlecht",
+				"es": "Malo",
+				"cn": "坏 (huài)",
+				"ar": "سيء (sayyiʾ)"
+			},
+			{
+				"ru": "Большой",
+				"en": "Big",
+				"fr": "Grand",
+				"de": "Groß",
+				"es": "Grande",
+				"cn": "大 (dà)",
+				"ar": "كبير (kabīr)"
+			},
+			{
+				"ru": "Маленький",
+				"en": "Small",
+				"fr": "Petit",
+				"de": "Klein",
+				"es": "Pequeño",
+				"cn": "小 (xiǎo)",
+				"ar": "صغير (ṣaġīr)"
+			},
+			{
+				"ru": "Тихий",
+				"en": "Quiet",
+				"fr": "Silencieux",
+				"de": "Leise",
+				"es": "Callado",
+				"cn": "安静 (ānjìng)",
+				"ar": "هادئ (hādiʾ)"
+			},
+			{
+				"ru": "Громкий",
+				"en": "Loud",
+				"fr": "Fort",
+				"de": "Laut",
+				"es": "Fuerte",
+				"cn": "大声 (dàshēng)",
+				"ar": "صاخب (ṣāḫib)"
+			},
+			{
+				"ru": "Быстрый",
+				"en": "Fast",
+				"fr": "Rapide",
+				"de": "Schnell",
+				"es": "Rápido",
+				"cn": "快 (kuài)",
+				"ar": "سريع (sarīʿ)"
+			},
+			{
+				"ru": "Медленный",
+				"en": "Slow",
+				"fr": "Lent",
+				"de": "Langsam",
+				"es": "Lento",
+				"cn": "慢 (màn)",
+				"ar": "بطيء (baṭīʾ)"
+			},
+			{
+				"ru": "Следующий",
+				"en": "Next",
+				"fr": "Prochain",
+				"de": "Nächste",
+				"es": "Siguiente",
+				"cn": "下一个 (xià yīgè)",
+				"ar": "تالي (tālī)"
+			},
+			{
+				"ru": "Предыдущий",
+				"en": "Previous",
+				"fr": "Précédent",
+				"de": "Vorherige",
+				"es": "Anterior",
+				"cn": "上一个 (shàng yīgè)",
+				"ar": "سابق (sābiq)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Белый",
+				"en": "White",
+				"fr": "Blanc",
+				"de": "Weiß",
+				"es": "Blanco",
+				"cn": "白 (bái)",
+				"ar": "أبيض (ʾabyaḍ)"
+			},
+			{
+				"ru": "Желтый",
+				"en": "Yellow",
+				"fr": "Jaune",
+				"de": "Gelb",
+				"es": "Amarillo",
+				"cn": "黄 (huáng)",
+				"ar": "أصفر (ʾaṣfar)"
+			},
+			{
+				"ru": "Красный",
+				"en": "Red",
+				"fr": "Rouge",
+				"de": "Rot",
+				"es": "Rojo",
+				"cn": "红 (hóng)",
+				"ar": "أحمر (ʾaḥmar)"
+			},
+			{
+				"ru": "Синий",
+				"en": "Blue",
+				"fr": "Bleu",
+				"de": "Blau",
+				"es": "Azul",
+				"cn": "蓝 (lán)",
+				"ar": "أزرق (ʾazraq)"
+			},
+			{
+				"ru": "Зеленый",
+				"en": "Green",
+				"fr": "Vert",
+				"de": "Grün",
+				"es": "Verde",
+				"cn": "绿 (lǜ)",
+				"ar": "أخضر (ʾaḫḍar)"
+			},
+			{
+				"ru": "Черный",
+				"en": "Black",
+				"fr": "Noir",
+				"de": "Schwarz",
+				"es": "Negro",
+				"cn": "黑 (hēi)",
+				"ar": "أسود (ʾaswad)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Кислый",
+				"en": "Sour",
+				"fr": "Sur",
+				"de": "Sauer",
+				"es": "Ácido",
+				"cn": "酸 (suān)",
+				"ar": "حامض (ḥāmiḍ)"
+			},
+			{
+				"ru": "Горький",
+				"en": "Bitter",
+				"fr": "Amer",
+				"de": "Bitter",
+				"es": "Amargo",
+				"cn": "苦 (kǔ)",
+				"ar": "مر (murr)"
+			},
+			{
+				"ru": "Острый",
+				"en": "Spicy",
+				"fr": "Piquant",
+				"de": "Scharf",
+				"es": "Picante",
+				"cn": "辣 (là)",
+				"ar": "حار (ḥārr)"
+			},
+			{
+				"ru": "Сладкий",
+				"en": "Sweet",
+				"fr": "Sucré",
+				"de": "Süß",
+				"es": "Dulce",
+				"cn": "甜 (tián)",
+				"ar": "حلو (ḥulw)"
+			},
+			{
+				"ru": "Соленый",
+				"en": "Salty",
+				"fr": "Salé",
+				"de": "Salzig",
+				"es": "Salado",
+				"cn": "咸 (xián)",
+				"ar": "مالح (māliḥ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Свободный",
+				"en": "Free",
+				"fr": "Libre",
+				"de": "Frei",
+				"es": "Libre",
+				"cn": "自由 (zìyóu)",
+				"ar": "حر (ḥurr)"
+			},
+			{
+				"ru": "Красивый",
+				"en": "Beautiful",
+				"fr": "Beau",
+				"de": "Schön",
+				"es": "Hermoso",
+				"cn": "漂亮 (piàoliang)",
+				"ar": "جميل (jamīl)"
+			},
+			{
+				"ru": "Вкусный",
+				"en": "Tasty",
+				"fr": "Délicieux",
+				"de": "Lecker",
+				"es": "Delicioso",
+				"cn": "好吃 (hǎochī)",
+				"ar": "لذيذ (laḏīḏ)"
+			},
+			{
+				"ru": "Тяжелый",
+				"en": "Heavy",
+				"fr": "Lourd",
+				"de": "Schwer",
+				"es": "Pesado",
+				"cn": "重 (zhòng)",
+				"ar": "ثقيل (ṯaqīl)"
+			},
+			{
+				"ru": "Одинаковый",
+				"en": "Same",
+				"fr": "Même",
+				"de": "Gleich",
+				"es": "Mismo",
+				"cn": "一样 (yíyàng)",
+				"ar": "نفس (nafs)"
+			},
+			{
+				"ru": "Грустный",
+				"en": "Sad",
+				"fr": "Triste",
+				"de": "Traurig",
+				"es": "Triste",
+				"cn": "悲伤 (bēishāng)",
+				"ar": "حزين (ḥazīn)"
+			},
+			{
+				"ru": "Усталый",
+				"en": "Tired",
+				"fr": "Fatigué",
+				"de": "Müde",
+				"es": "Cansado",
+				"cn": "累 (lèi)",
+				"ar": "متعب (mutʿib)"
+			},
+			{
+				"ru": "Испуганный",
+				"en": "Scared / be afraid",
+				"fr": "Effrayé / avoir peur",
+				"de": "Erschreckt / Angst haben",
+				"es": "Asustado",
+				"cn": "害怕 (hàipà)",
+				"ar": "خائف (ḫāʾif)"
+			},
+			{
+				"ru": "Счастливый",
+				"en": "Happy",
+				"fr": "Heureux",
+				"de": "Glücklich",
+				"es": "Feliz",
+				"cn": "快乐 (kuàilè)",
+				"ar": "سعيد (saʿīd)"
+			},
+			{
+				"ru": "Другой",
+				"en": "Other",
+				"fr": "Autre",
+				"de": "Andere",
+				"es": "Otro",
+				"cn": "其他 (qítā)",
+				"ar": "آخر (ʾāḫar)"
+			},
+			{
+				"ru": "Больной",
+				"en": "Sick",
+				"fr": "Malade",
+				"de": "Krank",
+				"es": "Enfermo",
+				"cn": "生病 (shēngbìng)",
+				"ar": "مريض (marīḍ)"
+			},
+			{
+				"ru": "Сломанный",
+				"en": "Broken",
+				"fr": "Cassé",
+				"de": "Kaputt",
+				"es": "Roto",
+				"cn": "坏 (huài)",
+				"ar": "مكسور (maksūr)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Время",
+				"en": "Time",
+				"fr": "Temps (m)",
+				"de": "Zeit (f)",
+				"es": "Tiempo (m)",
+				"cn": "时间 (shíjiān)",
+				"ar": "وقت (waqt)"
+			},
+			{
+				"ru": "Час",
+				"en": "Hour",
+				"fr": "Heure (f)",
+				"de": "Stunde (f)",
+				"es": "Hora (f)",
+				"cn": "小时 (xiǎoshí)",
+				"ar": "ساعة (sāʿa)"
+			},
+			{
+				"ru": "Минута",
+				"en": "Minute",
+				"fr": "Minute (f)",
+				"de": "Minute (f)",
+				"es": "Minuto (m)",
+				"cn": "分钟 (fēnzhōng)",
+				"ar": "دقيقة (daqīqa)"
+			},
+			{
+				"ru": "Неделя",
+				"en": "Week",
+				"fr": "Semaine (f)",
+				"de": "Woche (f)",
+				"es": "Semana (f)",
+				"cn": "星期 (xīngqī)",
+				"ar": "أسبوع (ʾusbūʿ)"
+			},
+			{
+				"ru": "Месяц",
+				"en": "Month",
+				"fr": "Mois (m)",
+				"de": "Monat (m)",
+				"es": "Mes (m)",
+				"cn": "月 (yuè)",
+				"ar": "شهر (šahr)"
+			},
+			{
+				"ru": "Год",
+				"en": "Year",
+				"fr": "An (m)",
+				"de": "Jahr (n)",
+				"es": "Año (m)",
+				"cn": "年 (nián)",
+				"ar": "سنة (sana)"
+			},
+			{
+				"ru": "Сегодня",
+				"en": "Today",
+				"fr": "Aujourd'hui",
+				"de": "Heute",
+				"es": "Hoy",
+				"cn": "今天 (jīntiān)",
+				"ar": "اليوم (al-yawm)"
+			},
+			{
+				"ru": "Завтра",
+				"en": "Tomorrow",
+				"fr": "Demain",
+				"de": "Morgen",
+				"es": "Mañana",
+				"cn": "明天 (míngtiān)",
+				"ar": "غداً (ġadan)"
+			},
+			{
+				"ru": "Вчера",
+				"en": "Yesterday",
+				"fr": "Hier",
+				"de": "Gestern",
+				"es": "Ayer",
+				"cn": "昨天 (zuótiān)",
+				"ar": "أمس (ʾams)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Зима",
+				"en": "Winter",
+				"fr": "Hiver (m)",
+				"de": "Winter (m)",
+				"es": "Invierno (m)",
+				"cn": "冬天 (dōngtiān)",
+				"ar": "شتاء (šitāʾ)"
+			},
+			{
+				"ru": "Лето",
+				"en": "Summer",
+				"fr": "Été (m)",
+				"de": "Sommer (m)",
+				"es": "Verano (m)",
+				"cn": "夏天 (xiàtiān)",
+				"ar": "صيف (ṣayf)"
+			},
+			{
+				"ru": "Осень",
+				"en": "Autumn",
+				"fr": "Automne (m)",
+				"de": "Herbst (m)",
+				"es": "Otoño (m)",
+				"cn": "秋天 (qiūtiān)",
+				"ar": "خريف (ḫarīf)"
+			},
+			{
+				"ru": "Весна",
+				"en": "Spring",
+				"fr": "Printemps (m)",
+				"de": "Frühling (m)",
+				"es": "Primavera (f)",
+				"cn": "春天 (chūntiān)",
+				"ar": "ربيع (rabīʿ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "День",
+				"en": "Day",
+				"fr": "Jour (m)",
+				"de": "Tag (m)",
+				"es": "Día (m)",
+				"cn": "天 (tiān)",
+				"ar": "يوم (yawm)"
+			},
+			{
+				"ru": "Ночь",
+				"en": "Night",
+				"fr": "Nuit (f)",
+				"de": "Nacht (f)",
+				"es": "Noche (f)",
+				"cn": "晚上 (wǎnshang)",
+				"ar": "ليل (layl)"
+			},
+			{
+				"ru": "Утро",
+				"en": "Morning",
+				"fr": "Matin (m)",
+				"de": "Morgen (m)",
+				"es": "Mañana (f)",
+				"cn": "早晨 (zǎochén)",
+				"ar": "صباح (ṣabāḥ)"
+			},
+			{
+				"ru": "Вечер",
+				"en": "Evening",
+				"fr": "Soir (m)",
+				"de": "Abend (m)",
+				"es": "Tarde (f)",
+				"cn": "晚上 (wǎnshang)",
+				"ar": "مساء (masāʾ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Начало",
+				"en": "Start",
+				"fr": "Début (m)",
+				"de": "Anfang (m)",
+				"es": "Comienzo (m)",
+				"cn": "开始 (kāishǐ)",
+				"ar": "بداية (bidāya)"
+			},
+			{
+				"ru": "Конец",
+				"en": "End",
+				"fr": "Fin (f)",
+				"de": "Ende (n)",
+				"es": "Fin (m)",
+				"cn": "结束 (jiéshù)",
+				"ar": "نهاية (nihāya)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Вверх",
+				"en": "Up",
+				"fr": "En haut",
+				"de": "Hoch",
+				"es": "Arriba",
+				"cn": "上 (shàng)",
+				"ar": "فوق (fawq)"
+			},
+			{
+				"ru": "Вниз",
+				"en": "Down",
+				"fr": "En bas",
+				"de": "Hinunter",
+				"es": "Abajo",
+				"cn": "下 (xià)",
+				"ar": "تحت (taḥt)"
+			},
+			{
+				"ru": "Налево",
+				"en": "Left",
+				"fr": "À gauche",
+				"de": "Links",
+				"es": "Izquierda",
+				"cn": "左 (zuǒ)",
+				"ar": "يسار (yasār)"
+			},
+			{
+				"ru": "Направо",
+				"en": "Right",
+				"fr": "À droite",
+				"de": "Rechts",
+				"es": "Derecha",
+				"cn": "右 (yòu)",
+				"ar": "يمين (yamīn)"
+			},
+			{
+				"ru": "Вперед",
+				"en": "Forward",
+				"fr": "En avant",
+				"de": "Vorwärts",
+				"es": "Adelante",
+				"cn": "前 (qián)",
+				"ar": "أمام (ʾamām)"
+			},
+			{
+				"ru": "Назад",
+				"en": "Back",
+				"fr": "En arrière",
+				"de": "Zurück",
+				"es": "Atrás",
+				"cn": "后 (hòu)",
+				"ar": "خلف (ḫalf)"
+			},
+			{
+				"ru": "Наоборот",
+				"en": "Vice versa",
+				"fr": "Vice versa",
+				"de": "Umgekehrt",
+				"es": "Viceversa",
+				"cn": "反之亦然 (fǎn zhī yì rán)",
+				"ar": "النقيض (an-niqīḍ)"
+			},
+			{
+				"ru": "Напротив",
+				"en": "Opposite",
+				"fr": "En face / opposé",
+				"de": "Gegenüber",
+				"es": "Frente a",
+				"cn": "对面 (duìmiàn)",
+				"ar": "مُقَابِل (muqābil)"
+			},
+			{
+				"ru": "Здесь",
+				"en": "Here",
+				"fr": "Ici",
+				"de": "Hier",
+				"es": "Aquí",
+				"cn": "这里 (zhèlǐ)",
+				"ar": "هنا (hunā)"
+			},
+			{
+				"ru": "Там",
+				"en": "There",
+				"fr": "Là",
+				"de": "Da",
+				"es": "Allí",
+				"cn": "那里 (nàlǐ)",
+				"ar": "هناك (hunāk)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Север",
+				"en": "North",
+				"fr": "Nord (m)",
+				"de": "Norden (m)",
+				"es": "Norte (m)",
+				"cn": "北 (běi)",
+				"ar": "شمال (šamāl)"
+			},
+			{
+				"ru": "Запад",
+				"en": "West",
+				"fr": "Ouest (m)",
+				"de": "Westen (m)",
+				"es": "Oeste (m)",
+				"cn": "西 (xī)",
+				"ar": "غرب (ġarb)"
+			},
+			{
+				"ru": "Юг",
+				"en": "South",
+				"fr": "Sud (m)",
+				"de": "Süden (m)",
+				"es": "Sur (m)",
+				"cn": "南 (nán)",
+				"ar": "جنوب (janūb)"
+			},
+			{
+				"ru": "Восток",
+				"en": "East",
+				"fr": "Est (m)",
+				"de": "Osten (m)",
+				"es": "Este (m)",
+				"cn": "东 (dōng)",
+				"ar": "شرق (šarq)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Солнце",
+				"en": "Sun",
+				"fr": "Soleil (m)",
+				"de": "Sonne (f)",
+				"es": "Sol (m)",
+				"cn": "太阳 (tàiyáng)",
+				"ar": "شمس (šams)"
+			},
+			{
+				"ru": "Ветер",
+				"en": "Wind",
+				"fr": "Vent (m)",
+				"de": "Wind (m)",
+				"es": "Viento (m)",
+				"cn": "风 (fēng)",
+				"ar": "ريح (rīḥ)"
+			},
+			{
+				"ru": "Дождь",
+				"en": "Rain",
+				"fr": "Pluie (f)",
+				"de": "Regen (m)",
+				"es": "Lluvia (f)",
+				"cn": "雨 (yǔ)",
+				"ar": "مطر (maṭar)"
+			},
+			{
+				"ru": "Снег",
+				"en": "Snow",
+				"fr": "Neige (f)",
+				"de": "Schnee (m)",
+				"es": "Nieve (f)",
+				"cn": "雪 (xuě)",
+				"ar": "ثلج (ṯalj)"
+			},
+			{
+				"ru": "Лед",
+				"en": "Ice",
+				"fr": "Glace (f)",
+				"de": "Eis (n)",
+				"es": "Hielo (m)",
+				"cn": "冰 (bīng)",
+				"ar": "جليد (jalīd)"
+			},
+			{
+				"ru": "Туман",
+				"en": "Fog",
+				"fr": "Brouillard (m)",
+				"de": "Nebel (m)",
+				"es": "Niebla (f)",
+				"cn": "雾 (wù)",
+				"ar": "ضباب (ḍabāb)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "0 — ноль",
+				"en": "Zero",
+				"fr": "Zéro",
+				"de": "Null",
+				"es": "Cero",
+				"cn": "零 (líng)",
+				"ar": "صفر (ṣifr)"
+			},
+			{
+				"ru": "1 — один",
+				"en": "One",
+				"fr": "Un",
+				"de": "Eins",
+				"es": "Uno",
+				"cn": "一 (yī)",
+				"ar": "واحد (wāḥid)"
+			},
+			{
+				"ru": "2 — два",
+				"en": "Two",
+				"fr": "Deux",
+				"de": "Zwei",
+				"es": "Dos",
+				"cn": "二 (èr)",
+				"ar": "اثنان (iṯnān)"
+			},
+			{
+				"ru": "3 — три",
+				"en": "Three",
+				"fr": "Trois",
+				"de": "Drei",
+				"es": "Tres",
+				"cn": "三 (sān)",
+				"ar": "ثلاثة (ṯalāṯa)"
+			},
+			{
+				"ru": "4 — четыре",
+				"en": "Four",
+				"fr": "Quatre",
+				"de": "Vier",
+				"es": "Cuatro",
+				"cn": "四 (sì)",
+				"ar": "أربعة (ʾarbaʿa)"
+			},
+			{
+				"ru": "5 — пять",
+				"en": "Five",
+				"fr": "Cinq",
+				"de": "Fünf",
+				"es": "Cinco",
+				"cn": "五 (wǔ)",
+				"ar": "خمسة (ḫamsa)"
+			},
+			{
+				"ru": "6 — шесть",
+				"en": "Six",
+				"fr": "Six",
+				"de": "Sechs",
+				"es": "Seis",
+				"cn": "六 (liù)",
+				"ar": "ستة (sitta)"
+			},
+			{
+				"ru": "7 — семь",
+				"en": "Seven",
+				"fr": "Sept",
+				"de": "Sieben",
+				"es": "Siete",
+				"cn": "七 (qī)",
+				"ar": "سبعة (sabʿa)"
+			},
+			{
+				"ru": "8 — восемь",
+				"en": "Eight",
+				"fr": "Huit",
+				"de": "Acht",
+				"es": "Ocho",
+				"cn": "八 (bā)",
+				"ar": "ثمانية (ṯamāniya)"
+			},
+			{
+				"ru": "9 — девять",
+				"en": "Nine",
+				"fr": "Neuf",
+				"de": "Neun",
+				"es": "Nueve",
+				"cn": "九 (jiǔ)",
+				"ar": "تسعة (tisʿa)"
+			},
+			{
+				"ru": "10 — десять",
+				"en": "Ten",
+				"fr": "Dix",
+				"de": "Zehn",
+				"es": "Diez",
+				"cn": "十 (shí)",
+				"ar": "عشرة (ʿašara)"
+			},
+			{
+				"ru": "100 — сто",
+				"en": "Hundred",
+				"fr": "Cent",
+				"de": "Hundert",
+				"es": "Cien",
+				"cn": "百 (bǎi)",
+				"ar": "مائة (miʾa)"
+			},
+			{
+				"ru": "1000 — тысяча",
+				"en": "Thousand",
+				"fr": "Mille",
+				"de": "Tausend",
+				"es": "Mil",
+				"cn": "千 (qiān)",
+				"ar": "ألف (ʾalf)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "И",
+				"en": "And",
+				"fr": "Et",
+				"de": "Und",
+				"es": "Y",
+				"cn": "和 (hé)",
+				"ar": "و (wa)"
+			},
+			{
+				"ru": "Или",
+				"en": "Or",
+				"fr": "Ou",
+				"de": "Oder",
+				"es": "O",
+				"cn": "或 (huò)",
+				"ar": "أو (ʾaw)"
+			},
+			{
+				"ru": "Не",
+				"en": "Not",
+				"fr": "Ne...pas",
+				"de": "Nicht / kein",
+				"es": "No",
+				"cn": "不 (bù)",
+				"ar": "لا (lā)"
+			},
+			{
+				"ru": "Если",
+				"en": "If",
+				"fr": "Si",
+				"de": "Wenn",
+				"es": "Si",
+				"cn": "如果 (rúguǒ)",
+				"ar": "إذا (ʾiḏā)"
+			},
+			{
+				"ru": "Да",
+				"en": "Yes",
+				"fr": "Oui",
+				"de": "Ja",
+				"es": "Sí",
+				"cn": "是 (shì)",
+				"ar": "نعم (naʿam)"
+			},
+			{
+				"ru": "Нет",
+				"en": "No",
+				"fr": "Non",
+				"de": "Nein",
+				"es": "No",
+				"cn": "不 (bù)",
+				"ar": "لا (lā)"
+			},
+			{
+				"ru": "Можно",
+				"en": "Allowed",
+				"fr": "Autorisé",
+				"de": "Erlaubt",
+				"es": "Permitido",
+				"cn": "可以 (kěyǐ)",
+				"ar": "مسموح (masmūḥ)"
+			},
+			{
+				"ru": "Нельзя",
+				"en": "Can't",
+				"fr": "Interdit",
+				"de": "Verboten",
+				"es": "Prohibido",
+				"cn": "不可以 (bù kěyǐ)",
+				"ar": "ممنوع (mamnūʿ)"
+			},
+			{
+				"ru": "Нужно",
+				"en": "Need",
+				"fr": "Avoir besoin",
+				"de": "Brauchen",
+				"es": "Necesito",
+				"cn": "需要 (xūyào)",
+				"ar": "أحتاج (uḥtāj)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Друг",
+				"en": "Friend",
+				"fr": "Ami (m)",
+				"de": "Freund (m)",
+				"es": "Amigo (m)",
+				"cn": "朋友 (péngyou)",
+				"ar": "صديق (ṣadīq)"
+			},
+			{
+				"ru": "Враг",
+				"en": "Enemy",
+				"fr": "Ennemi (m)",
+				"de": "Feind (m)",
+				"es": "Enemigo (m)",
+				"cn": "敌人 (dírén)",
+				"ar": "عدو (ʿaduww)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Правда",
+				"en": "True",
+				"fr": "Vrai",
+				"de": "Wahrheit (f)",
+				"es": "Verdad (f)",
+				"cn": "真相 (zhēnxiàng)",
+				"ar": "حقيقة (ḥaqīqa)"
+			},
+			{
+				"ru": "Ошибка",
+				"en": "Mistake / Error",
+				"fr": "Erreur (f)",
+				"de": "Fehler (m)",
+				"es": "Error (m)",
+				"cn": "错误 (cuòwù)",
+				"ar": "خطأ (ḫaṭaʾ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "От",
+				"en": "From",
+				"fr": "De",
+				"de": "Von",
+				"es": "De",
+				"cn": "从 (cóng)",
+				"ar": "من (min)"
+			},
+			{
+				"ru": "До",
+				"en": "To",
+				"fr": "Jusqu'à",
+				"de": "Bis",
+				"es": "Hasta",
+				"cn": "到 (dào)",
+				"ar": "إلى (ʾilā)"
+			},
+			{
+				"ru": "В",
+				"en": "In",
+				"fr": "Dans",
+				"de": "In",
+				"es": "En",
+				"cn": "在 (zài)",
+				"ar": "في (fī)"
+			},
+			{
+				"ru": "Для",
+				"en": "For",
+				"fr": "Pour",
+				"de": "Für",
+				"es": "Para",
+				"cn": "为了 (wèile)",
+				"ar": "لـ (li-)"
+			},
+			{
+				"ru": "Без",
+				"en": "Without",
+				"fr": "Sans",
+				"de": "Ohne",
+				"es": "Sin",
+				"cn": "没有 (méiyǒu)",
+				"ar": "بدون (bidūn)"
+			},
+			{
+				"ru": "На",
+				"en": "On",
+				"fr": "Sur",
+				"de": "Auf",
+				"es": "Sobre",
+				"cn": "上 (shàng)",
+				"ar": "على (ʿalā)"
+			},
+			{
+				"ru": "Под",
+				"en": "Under",
+				"fr": "Sous",
+				"de": "Unter",
+				"es": "Debajo",
+				"cn": "下 (xià)",
+				"ar": "تحت (taḥt)"
+			},
+			{
+				"ru": "Около",
+				"en": "Near",
+				"fr": "Près de",
+				"de": "Neben",
+				"es": "Cerca",
+				"cn": "附近 (fùjìn)",
+				"ar": "قرب (qurb)"
+			},
+			{
+				"ru": "Между",
+				"en": "Between",
+				"fr": "Entre",
+				"de": "Zwischen",
+				"es": "Entre",
+				"cn": "之间 (zhījiān)",
+				"ar": "بين (bayna)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Вместе",
+				"en": "Together",
+				"fr": "Ensemble",
+				"de": "Zusammen",
+				"es": "Juntos",
+				"cn": "一起 (yīqǐ)",
+				"ar": "معًا (maʿan)"
+			},
+			{
+				"ru": "Уже",
+				"en": "Already",
+				"fr": "Déjà",
+				"de": "Schon",
+				"es": "Ya",
+				"cn": "已经 (yǐjīng)",
+				"ar": "قبل (qabla)"
+			},
+			{
+				"ru": "Снова",
+				"en": "Again",
+				"fr": "Encore",
+				"de": "Noch einmal",
+				"es": "Otra vez",
+				"cn": "又 (yòu)",
+				"ar": "مرة أخرى (marra ʾuḫrā)"
+			},
+			{
+				"ru": "Всегда",
+				"en": "Always",
+				"fr": "Toujours",
+				"de": "Immer",
+				"es": "Siempre",
+				"cn": "总是 (zǒngshì)",
+				"ar": "دائمًا (dāʾiman)"
+			},
+			{
+				"ru": "Никогда",
+				"en": "Never",
+				"fr": "Jamais",
+				"de": "Nie",
+				"es": "Nunca",
+				"cn": "从不 (cóngbù)",
+				"ar": "أبدًا (ʾabadan)"
+			},
+			{
+				"ru": "Только",
+				"en": "Only",
+				"fr": "Seulement",
+				"de": "Nur",
+				"es": "Solo",
+				"cn": "只 (zhǐ)",
+				"ar": "فقط (faqaṭ)"
+			},
+			{
+				"ru": "Очень",
+				"en": "Very",
+				"fr": "Très",
+				"de": "Sehr",
+				"es": "Muy",
+				"cn": "很 (hěn)",
+				"ar": "جدًا (jiddan)"
+			},
+			{
+				"ru": "Рано",
+				"en": "Early",
+				"fr": "Tôt",
+				"de": "Früh",
+				"es": "Temprano",
+				"cn": "早 (zǎo)",
+				"ar": "مبكرًا (mubakkiran)"
+			},
+			{
+				"ru": "Поздно",
+				"en": "Late",
+				"fr": "Tard",
+				"de": "Spät",
+				"es": "Tarde",
+				"cn": "晚 (wǎn)",
+				"ar": "متأخرًا (mutaʾaḫḫiran)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Я",
+				"en": "I",
+				"fr": "Je",
+				"de": "Ich",
+				"es": "Yo",
+				"cn": "我 (wǒ)",
+				"ar": "أنا (ʾanā)"
+			},
+			{
+				"ru": "Ты",
+				"en": "You",
+				"fr": "Tu",
+				"de": "Du",
+				"es": "Tú",
+				"cn": "你 (nǐ)",
+				"ar": "أنت (ʾanta)"
+			},
+			{
+				"ru": "Он / она / оно",
+				"en": "He / she / it",
+				"fr": "Il / elle",
+				"de": "Er / sie / es",
+				"es": "Él",
+				"cn": "他 (tā)",
+				"ar": "هو (huwa)"
+			},
+			{
+				"ru": "Мы",
+				"en": "We",
+				"fr": "Nous",
+				"de": "Wir",
+				"es": "Nosotros",
+				"cn": "我们 (wǒmen)",
+				"ar": "نحن (naḥnu)"
+			},
+			{
+				"ru": "Вы",
+				"en": "You",
+				"fr": "Vous",
+				"de": "Ihr",
+				"es": "Vosotros",
+				"cn": "你们 (nǐmen)",
+				"ar": "أنتم (ʾantum)"
+			},
+			{
+				"ru": "Они",
+				"en": "They",
+				"fr": "Ils / elles",
+				"de": "Sie",
+				"es": "Ellos",
+				"cn": "他们 (tāmen)",
+				"ar": "هم (hum)"
+			},
+			{
+				"ru": "Всё / Все",
+				"en": "All / everyone",
+				"fr": "Tout / tous",
+				"de": "Alle",
+				"es": "Todos",
+				"cn": "大家 (dàjiā)",
+				"ar": "الجميع (al-jamīʿ)"
+			},
+			{
+				"ru": "Никто",
+				"en": "No one",
+				"fr": "Personne",
+				"de": "Niemand",
+				"es": "Nadie",
+				"cn": "没人 (méirén)",
+				"ar": "لا أحد (lā ʾaḥad)"
+			},
+			{
+				"ru": "Ничего",
+				"en": "Nothing",
+				"fr": "Rien",
+				"de": "Nichts",
+				"es": "Nada",
+				"cn": "没有 (méiyǒu)",
+				"ar": "لا شيء (lā šayʾ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Мой",
+				"en": "My",
+				"fr": "Mon",
+				"de": "Mein",
+				"es": "Mi",
+				"cn": "我的 (wǒ de)",
+				"ar": "لي (lī)"
+			},
+			{
+				"ru": "Твой",
+				"en": "Your",
+				"fr": "Ton",
+				"de": "Dein",
+				"es": "Tu",
+				"cn": "你的 (nǐ de)",
+				"ar": "لك (laka)"
+			},
+			{
+				"ru": "Его / её",
+				"en": "His / her",
+				"fr": "Son",
+				"de": "Sein",
+				"es": "Su",
+				"cn": "他的 (tā de)",
+				"ar": "له (lahu)"
+			},
+			{
+				"ru": "Наш",
+				"en": "Our",
+				"fr": "Notre",
+				"de": "Unser",
+				"es": "Nuestro",
+				"cn": "我们的 (wǒmen de)",
+				"ar": "لنا (lanā)"
+			},
+			{
+				"ru": "Ваш",
+				"en": "Your",
+				"fr": "Votre",
+				"de": "Euer",
+				"es": "Vuestro",
+				"cn": "你们的 (nǐmen de)",
+				"ar": "لكم (lakum)"
+			},
+			{
+				"ru": "Их",
+				"en": "Their",
+				"fr": "Leur",
+				"de": "Ihr",
+				"es": "Su",
+				"cn": "他们的 (tāmen de)",
+				"ar": "لهم (lahum)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Кто",
+				"en": "Who",
+				"fr": "Qui",
+				"de": "Wer",
+				"es": "Quién",
+				"cn": "谁 (shéi)",
+				"ar": "من (man)"
+			},
+			{
+				"ru": "Что",
+				"en": "What",
+				"fr": "Quoi",
+				"de": "Was",
+				"es": "Qué",
+				"cn": "什么 (shénme)",
+				"ar": "ماذا (māḏā)"
+			},
+			{
+				"ru": "Как",
+				"en": "How",
+				"fr": "Comment",
+				"de": "Wie",
+				"es": "Cómo",
+				"cn": "怎么 (zěnme)",
+				"ar": "كيف (kayfa)"
+			},
+			{
+				"ru": "Где",
+				"en": "Where",
+				"fr": "Où",
+				"de": "Wo",
+				"es": "Dónde",
+				"cn": "哪里 (nǎlǐ)",
+				"ar": "أين (ʾayna)"
+			},
+			{
+				"ru": "Когда",
+				"en": "When",
+				"fr": "Quand",
+				"de": "Wann",
+				"es": "Cuándo",
+				"cn": "什么时候 (shénme shíhòu)",
+				"ar": "متى (matā)"
+			},
+			{
+				"ru": "Сколько",
+				"en": "How many",
+				"fr": "Combien",
+				"de": "Wie viel",
+				"es": "Cuánto",
+				"cn": "多少 (duōshǎo)",
+				"ar": "كم (kam)"
+			},
+			{
+				"ru": "Почему",
+				"en": "Why",
+				"fr": "Pourquoi",
+				"de": "Warum",
+				"es": "Por qué",
+				"cn": "为什么 (wèishéme)",
+				"ar": "لماذا (limāḏā)"
+			},
+			{
+				"ru": "Какой",
+				"en": "Which",
+				"fr": "Quel",
+				"de": "Welcher",
+				"es": "Cuál / Qué",
+				"cn": "哪个 (nǎge)",
+				"ar": "أي (ʾayy)"
+			},
+			{
+				"ru": "Этот",
+				"en": "This",
+				"fr": "Ce",
+				"de": "Dieser",
+				"es": "Este",
+				"cn": "这个 (zhège)",
+				"ar": "هذا (hāḏā)"
+			},
+			{
+				"ru": "Тот",
+				"en": "That",
+				"fr": "Ce ...-là",
+				"de": "Jener",
+				"es": "Ese / Aquel",
+				"cn": "那个 (nàge)",
+				"ar": "ذلك (ḏālika)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Форма",
+				"en": "Shape",
+				"fr": "Forme (f)",
+				"de": "Form (f)",
+				"es": "Forma (f)",
+				"cn": "形状 (xíngzhuàng)",
+				"ar": "شكل (šakl)"
+			},
+			{
+				"ru": "Угол",
+				"en": "Angle",
+				"fr": "Angle (m)",
+				"de": "Winkel (m)",
+				"es": "Ángulo (m)",
+				"cn": "角 (jiǎo)",
+				"ar": "زاوية (zāwiya)"
+			},
+			{
+				"ru": "Квадрат",
+				"en": "Square",
+				"fr": "Carré (m)",
+				"de": "Quadrat (n)",
+				"es": "Cuadrado (m)",
+				"cn": "正方形 (zhèngfāngxíng)",
+				"ar": "مربع (murabbaʿ)"
+			},
+			{
+				"ru": "Круг",
+				"en": "Circle",
+				"fr": "Cercle (m)",
+				"de": "Kreis (m)",
+				"es": "Círculo (m)",
+				"cn": "圆形 (yuánxíng)",
+				"ar": "دائرة (dāʾira)"
+			},
+			{
+				"ru": "Линия",
+				"en": "Line",
+				"fr": "Ligne (f)",
+				"de": "Linie (f)",
+				"es": "Línea (f)",
+				"cn": "线 (xiàn)",
+				"ar": "خط (ḫaṭṭ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Место",
+				"en": "Place",
+				"fr": "Endroit (m)",
+				"de": "Ort (m)",
+				"es": "Lugar (m)",
+				"cn": "地方 (dìfang)",
+				"ar": "مكان (makān)"
+			},
+			{
+				"ru": "Дом",
+				"en": "House",
+				"fr": "Maison (f)",
+				"de": "Haus (n)",
+				"es": "Casa (f)",
+				"cn": "房子 (fángzi)",
+				"ar": "منزل (manzil)"
+			},
+			{
+				"ru": "Вход",
+				"en": "Entrance",
+				"fr": "Entrée (f)",
+				"de": "Eingang (m)",
+				"es": "Entrada (f)",
+				"cn": "入口 (rùkǒu)",
+				"ar": "مدخل (madḫal)"
+			},
+			{
+				"ru": "Выход",
+				"en": "Exit",
+				"fr": "Sortie (f)",
+				"de": "Ausgang (m)",
+				"es": "Salida (f)",
+				"cn": "出口 (chūkǒu)",
+				"ar": "مخرج (maḫraj)"
+			},
+			{
+				"ru": "Стена",
+				"en": "Wall",
+				"fr": "Mur (m)",
+				"de": "Wand (f)",
+				"es": "Pared (f)",
+				"cn": "墙 (qiáng)",
+				"ar": "جدار (jidār)"
+			},
+			{
+				"ru": "Дверь",
+				"en": "Door",
+				"fr": "Porte (f)",
+				"de": "Tür (f)",
+				"es": "Puerta (f)",
+				"cn": "门 (mén)",
+				"ar": "باب (bāb)"
+			},
+			{
+				"ru": "Окно",
+				"en": "Window",
+				"fr": "Fenêtre (f)",
+				"de": "Fenster (n)",
+				"es": "Ventana (f)",
+				"cn": "窗户 (chuānghù)",
+				"ar": "نافذة (nāfiḏa)"
+			},
+			{
+				"ru": "Этаж",
+				"en": "Floor",
+				"fr": "Étage (m)",
+				"de": "Etage (f)",
+				"es": "Piso (m)",
+				"cn": "楼层 (lóucéng)",
+				"ar": "طابق (ṭābiq)"
+			},
+			{
+				"ru": "Комната",
+				"en": "Room",
+				"fr": "Chambre (f)",
+				"de": "Zimmer (n)",
+				"es": "Habitación (f)",
+				"cn": "房间 (fángjiān)",
+				"ar": "غرفة (ġurfa)"
+			},
+			{
+				"ru": "Ключ",
+				"en": "Key",
+				"fr": "Clé (f)",
+				"de": "Schlüssel (m)",
+				"es": "Llave (f)",
+				"cn": "钥匙 (yàoshi)",
+				"ar": "مفتاح (miftāḥ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Стол",
+				"en": "Table",
+				"fr": "Table (f)",
+				"de": "Tisch (m)",
+				"es": "Mesa (f)",
+				"cn": "桌子 (zhuōzi)",
+				"ar": "طاولة (ṭāwila)"
+			},
+			{
+				"ru": "Стул",
+				"en": "Chair",
+				"fr": "Chaise (f)",
+				"de": "Stuhl (m)",
+				"es": "Silla (f)",
+				"cn": "椅子 (yǐzi)",
+				"ar": "كرسي (kursī)"
+			},
+			{
+				"ru": "Кровать",
+				"en": "Bed",
+				"fr": "Lit (m)",
+				"de": "Bett (n)",
+				"es": "Cama (f)",
+				"cn": "床 (chuáng)",
+				"ar": "سرير (sarīr)"
+			},
+			{
+				"ru": "Белье",
+				"en": "Bed sheet",
+				"fr": "Draps (m pl)",
+				"de": "Bettwäsche (f)",
+				"es": "Ropa de cama (f)",
+				"cn": "床上用品 (chuángshàng yòngpǐn)",
+				"ar": "بياضات (bayāḍāt)"
+			},
+			{
+				"ru": "Душ",
+				"en": "Shower",
+				"fr": "Douche (f)",
+				"de": "Dusche (f)",
+				"es": "Ducha (f)",
+				"cn": "淋浴 (línyù)",
+				"ar": "دش (dušš)"
+			},
+			{
+				"ru": "Туалет",
+				"en": "Toilet",
+				"fr": "Toilettes (f pl)",
+				"de": "Toilette (f)",
+				"es": "Baño (m)",
+				"cn": "厕所 (cèsuǒ)",
+				"ar": "مرحاض (mirḥāḍ)"
+			},
+			{
+				"ru": "Холодильник",
+				"en": "Fridge",
+				"fr": "Réfrigérateur (m)",
+				"de": "Kühlschrank (m)",
+				"es": "Nevera (f)",
+				"cn": "冰箱 (bīngxiāng)",
+				"ar": "ثلاجة (ṯallāja)"
+			},
+			{
+				"ru": "Плита",
+				"en": "Stove",
+				"fr": "Cuisinière (f)",
+				"de": "Herd (m)",
+				"es": "Estufa (f)",
+				"cn": "炉子 (lúzi)",
+				"ar": "موقد (mawqid)"
+			},
+			{
+				"ru": "Чайник",
+				"en": "Kettle",
+				"fr": "Bouilloire (f)",
+				"de": "Teekanne (f)",
+				"es": "Hervidor (m)",
+				"cn": "水壶 (shuǐhú)",
+				"ar": "غلاية (ġallāya)"
+			},
+			{
+				"ru": "Свет",
+				"en": "Light",
+				"fr": "Lumière (f)",
+				"de": "Licht (n)",
+				"es": "Luz (f)",
+				"cn": "灯 (dēng)",
+				"ar": "ضوء (ḍawʾ)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Дорога",
+				"en": "Road",
+				"fr": "Route (f)",
+				"de": "Bahn (f)",
+				"es": "Carretera (f)",
+				"cn": "路 (lù)",
+				"ar": "طريق (ṭarīq)"
+			},
+			{
+				"ru": "Граница",
+				"en": "Border",
+				"fr": "Frontière (f)",
+				"de": "Grenze (f)",
+				"es": "Frontera (f)",
+				"cn": "边界 (biānjiè)",
+				"ar": "حدود (ḥudūd)"
+			},
+			{
+				"ru": "Город",
+				"en": "City",
+				"fr": "Ville (f)",
+				"de": "Stadt (f)",
+				"es": "Ciudad (f)",
+				"cn": "城市 (chéngshì)",
+				"ar": "مدينة (madīna)"
+			},
+			{
+				"ru": "Аэропорт",
+				"en": "Airport",
+				"fr": "Aéroport (m)",
+				"de": "Flughafen (m)",
+				"es": "Aeropuerto (m)",
+				"cn": "机场 (jīchǎng)",
+				"ar": "مطار (maṭār)"
+			},
+			{
+				"ru": "Вокзал",
+				"en": "Railway station",
+				"fr": "Gare (f)",
+				"de": "Bahnhof (m)",
+				"es": "Estación (f)",
+				"cn": "火车站 (huǒchēzhàn)",
+				"ar": "محطة (maḥaṭṭa)"
+			},
+			{
+				"ru": "Отправление",
+				"en": "Departure",
+				"fr": "Départ (m)",
+				"de": "Abfahrt (f)",
+				"es": "Salida (f)",
+				"cn": "出发 (chūfā)",
+				"ar": "مغادرة (muġādara)"
+			},
+			{
+				"ru": "Прибытие",
+				"en": "Arrival",
+				"fr": "Arrivée (f)",
+				"de": "Ankunft (f)",
+				"es": "Llegada (f)",
+				"cn": "到达 (dàodá)",
+				"ar": "وصول (wuṣūl)"
+			},
+			{
+				"ru": "Рейс",
+				"en": "Flight",
+				"fr": "Vol (m)",
+				"de": "Flug (m)",
+				"es": "Vuelo (m)",
+				"cn": "航班 (hángbān)",
+				"ar": "رحلة (riḥla)"
+			},
+			{
+				"ru": "Гостиница",
+				"en": "Hotel",
+				"fr": "Hôtel (m)",
+				"de": "Hotel (n)",
+				"es": "Hotel (m)",
+				"cn": "酒店 (jiǔdiàn)",
+				"ar": "فندق (funduq)"
+			},
+			{
+				"ru": "Рынок",
+				"en": "Market",
+				"fr": "Marché (m)",
+				"de": "Markt (m)",
+				"es": "Mercado (m)",
+				"cn": "市场 (shìchǎng)",
+				"ar": "سوق (sūq)"
+			},
+			{
+				"ru": "Магазин",
+				"en": "Shop",
+				"fr": "Magasin (m)",
+				"de": "Geschäft (n)",
+				"es": "Tienda (f)",
+				"cn": "商店 (shāngdiàn)",
+				"ar": "متجر (matjar)"
+			},
+			{
+				"ru": "Храм",
+				"en": "Temple",
+				"fr": "Temple (m)",
+				"de": "Tempel (m)",
+				"es": "Templo (m)",
+				"cn": "寺庙 (sìmiào)",
+				"ar": "معبد (maʿbad)"
+			},
+			{
+				"ru": "Улица",
+				"en": "Street",
+				"fr": "Rue (f)",
+				"de": "Straße (f)",
+				"es": "Calle (f)",
+				"cn": "街 (jiē)",
+				"ar": "شارع (šāriʿ)"
+			},
+			{
+				"ru": "Мост",
+				"en": "Bridge",
+				"fr": "Pont (m)",
+				"de": "Brücke (f)",
+				"es": "Puente (m)",
+				"cn": "桥 (qiáo)",
+				"ar": "جسر (jisr)"
+			},
+			{
+				"ru": "Перекресток",
+				"en": "Intersection",
+				"fr": "Carrefour (m)",
+				"de": "Kreuzung (f)",
+				"es": "Cruce (m)",
+				"cn": "十字路口 (shízì lùkǒu)",
+				"ar": "تقاطع (taqāṭuʿ)"
+			},
+			{
+				"ru": "Площадь",
+				"en": "Square",
+				"fr": "Place (f)",
+				"de": "Platz (m)",
+				"es": "Plaza (f)",
+				"cn": "广场 (guǎngchǎng)",
+				"ar": "ساحة (sāḥa)"
+			},
+			{
+				"ru": "Забор",
+				"en": "Fence",
+				"fr": "Palissade (f)",
+				"de": "Zaun (m)",
+				"es": "Valla (f)",
+				"cn": "篱笆 (líba)",
+				"ar": "سياج (siyāj)"
+			},
+			{
+				"ru": "Мусор",
+				"en": "Trash",
+				"fr": "Ordures (f pl)",
+				"de": "Müll (m)",
+				"es": "Basura (f)",
+				"cn": "垃圾 (lājī)",
+				"ar": "قمامة (qumāma)"
+			},
+			{
+				"ru": "Камень",
+				"en": "Stone",
+				"fr": "Pierre (f)",
+				"de": "Stein (m)",
+				"es": "Piedra (f)",
+				"cn": "石头 (shítou)",
+				"ar": "حجر (ḥajar)"
+			},
+			{
+				"ru": "Стекло",
+				"en": "Glass",
+				"fr": "Verre (m)",
+				"de": "Glas (n)",
+				"es": "Vidrio (m)",
+				"cn": "玻璃 (bōli)",
+				"ar": "زجاج (zujāj)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Лес",
+				"en": "Forest",
+				"fr": "Forêt (f)",
+				"de": "Wald (m)",
+				"es": "Bosque (m)",
+				"cn": "森林 (sēnlín)",
+				"ar": "غابة (ġāba)"
+			},
+			{
+				"ru": "Река",
+				"en": "River",
+				"fr": "Rivière (f)",
+				"de": "Fluss (m)",
+				"es": "Río (m)",
+				"cn": "河 (hé)",
+				"ar": "نهر (nahr)"
+			},
+			{
+				"ru": "Гора",
+				"en": "Mountain",
+				"fr": "Montagne (f)",
+				"de": "Berg (m)",
+				"es": "Montaña (f)",
+				"cn": "山 (shān)",
+				"ar": "جبل (jabal)"
+			},
+			{
+				"ru": "Озеро",
+				"en": "Lake",
+				"fr": "Lac (m)",
+				"de": "See (m)",
+				"es": "Lago (m)",
+				"cn": "湖 (hú)",
+				"ar": "بحيرة (buḥayra)"
+			},
+			{
+				"ru": "Поле",
+				"en": "Field",
+				"fr": "Champ (m)",
+				"de": "Feld (n)",
+				"es": "Campo (m)",
+				"cn": "田野 (tiányě)",
+				"ar": "حقل (ḥaql)"
+			},
+			{
+				"ru": "Море",
+				"en": "Sea",
+				"fr": "Mer (f)",
+				"de": "Meer (n)",
+				"es": "Mar (m/f)",
+				"cn": "海 (hǎi)",
+				"ar": "بحر (baḥr)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Машина",
+				"en": "Car",
+				"fr": "Voiture (f)",
+				"de": "Auto (n)",
+				"es": "Coche (m)",
+				"cn": "汽车 (qìchē)",
+				"ar": "سيارة (sayyāra)"
+			},
+			{
+				"ru": "Поезд",
+				"en": "Train",
+				"fr": "Train (m)",
+				"de": "Zug (m)",
+				"es": "Tren (m)",
+				"cn": "火车 (huǒchē)",
+				"ar": "قطار (qiṭār)"
+			},
+			{
+				"ru": "Самолет",
+				"en": "Airplane",
+				"fr": "Avion (m)",
+				"de": "Flugzeug (n)",
+				"es": "Avión (m)",
+				"cn": "飞机 (fēijī)",
+				"ar": "طائرة (ṭāʾira)"
+			},
+			{
+				"ru": "Корабль",
+				"en": "Ship",
+				"fr": "Bateau (m)",
+				"de": "Schiff (n)",
+				"es": "Barco (m)",
+				"cn": "船 (chuán)",
+				"ar": "سفينة (safīna)"
+			},
+			{
+				"ru": "Метро",
+				"en": "Subway",
+				"fr": "Métro (m)",
+				"de": "U-Bahn (f)",
+				"es": "Metro (m)",
+				"cn": "地铁 (dìtiě)",
+				"ar": "مترو (mitrū)"
+			},
+			{
+				"ru": "Автобус",
+				"en": "Bus",
+				"fr": "Bus (m)",
+				"de": "Bus (m)",
+				"es": "Autobús (m)",
+				"cn": "公共汽车 (gōnggòng qìchē)",
+				"ar": "حافلة (ḥāfila)"
+			},
+			{
+				"ru": "Велосипед",
+				"en": "Bicycle",
+				"fr": "Vélo (m)",
+				"de": "Fahrrad (n)",
+				"es": "Bicicleta (f)",
+				"cn": "自行车 (zìxíngchē)",
+				"ar": "دراجة (darrāja)"
+			},
+			{
+				"ru": "Газ",
+				"en": "Gas",
+				"fr": "Gaz (m)",
+				"de": "Gas (n)",
+				"es": "Gas (m)",
+				"cn": "煤气 (méiqì)",
+				"ar": "غاز (ġāz)"
+			},
+			{
+				"ru": "Бензин",
+				"en": "Gasoline / Petrol",
+				"fr": "Essence (f)",
+				"de": "Benzin (n)",
+				"es": "Gasolina (f)",
+				"cn": "汽油 (qìyóu)",
+				"ar": "بنزين (benzīn)"
+			},
+			{
+				"ru": "Карта",
+				"en": "Map",
+				"fr": "Carte (f)",
+				"de": "Karte (f)",
+				"es": "Mapa (m)",
+				"cn": "地图 (dìtú)",
+				"ar": "خريطة (ḫarīṭa)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Опасность",
+				"en": "Danger",
+				"fr": "Danger (m)",
+				"de": "Gefahr (f)",
+				"es": "Peligro (m)",
+				"cn": "危险 (wēixiǎn)",
+				"ar": "خطر (ḫaṭar)"
+			},
+			{
+				"ru": "Пожар",
+				"en": "Fire",
+				"fr": "Incendie (m)",
+				"de": "Brand (m)",
+				"es": "Incendio (m)",
+				"cn": "火灾 (huǒzāi)",
+				"ar": "حريق (ḥarīq)"
+			},
+			{
+				"ru": "Помощь",
+				"en": "Help",
+				"fr": "Aide (f)",
+				"de": "Hilfe (f)",
+				"es": "Ayuda (f)",
+				"cn": "帮助 (bāngzhù)",
+				"ar": "مساعدة (musāʿada)"
+			},
+			{
+				"ru": "Боль",
+				"en": "Pain",
+				"fr": "Douleur (f)",
+				"de": "Schmerz (m)",
+				"es": "Dolor (m)",
+				"cn": "疼痛 (téngtòng)",
+				"ar": "ألم (ʾalam)"
+			},
+			{
+				"ru": "Врач",
+				"en": "Doctor",
+				"fr": "Médecin (m)",
+				"de": "Arzt (m)",
+				"es": "Médico (m)",
+				"cn": "医生 (yīshēng)",
+				"ar": "طبيب (ṭabīb)"
+			},
+			{
+				"ru": "Полиция",
+				"en": "Police",
+				"fr": "Police (f)",
+				"de": "Polizei (f)",
+				"es": "Policía (f)",
+				"cn": "警察 (jǐngchá)",
+				"ar": "شرطة (šurṭa)"
+			},
+			{
+				"ru": "Лекарство",
+				"en": "Medicine",
+				"fr": "Médicament (m)",
+				"de": "Medikament (n)",
+				"es": "Medicina (f)",
+				"cn": "药 (yào)",
+				"ar": "دواء (dawāʾ)"
+			},
+			{
+				"ru": "Аллергия",
+				"en": "Allergy",
+				"fr": "Allergie (f)",
+				"de": "Allergie (f)",
+				"es": "Alergia (f)",
+				"cn": "过敏 (guòmǐn)",
+				"ar": "حساسية (ḥasāsiya)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Быть",
+				"en": "Be",
+				"fr": "Être",
+				"de": "Sein",
+				"es": "Ser / Estar",
+				"cn": "是 (shì)",
+				"ar": "كان (kāna)"
+			},
+			{
+				"ru": "Иметь",
+				"en": "Have",
+				"fr": "Avoir",
+				"de": "Haben",
+				"es": "Tener",
+				"cn": "有 (yǒu)",
+				"ar": "ملك (malaka)"
+			},
+			{
+				"ru": "Жить",
+				"en": "Live",
+				"fr": "Vivre",
+				"de": "Leben",
+				"es": "Vivir",
+				"cn": "住 (zhù)",
+				"ar": "عاش (ʿāša)"
+			},
+			{
+				"ru": "Спать",
+				"en": "Sleep",
+				"fr": "Dormir",
+				"de": "Schlafen",
+				"es": "Dormir",
+				"cn": "睡觉 (shuìjiào)",
+				"ar": "نام (nāma)"
+			},
+			{
+				"ru": "Есть",
+				"en": "Eat",
+				"fr": "Manger",
+				"de": "Essen",
+				"es": "Comer",
+				"cn": "吃 (chī)",
+				"ar": "أكل (ʾakala)"
+			},
+			{
+				"ru": "Пить",
+				"en": "Drink",
+				"fr": "Boire",
+				"de": "Trinken",
+				"es": "Beber",
+				"cn": "喝 (hē)",
+				"ar": "شرب (šariba)"
+			},
+			{
+				"ru": "Любить",
+				"en": "Love",
+				"fr": "Aimer",
+				"de": "Lieben",
+				"es": "Amar",
+				"cn": "爱 (ài)",
+				"ar": "أحب (ʾaḥabba)"
+			},
+			{
+				"ru": "Ехать",
+				"en": "Go",
+				"fr": "Aller",
+				"de": "Fahren",
+				"es": "Ir",
+				"cn": "坐车 (zuòchē)",
+				"ar": "ذهب (ḏahaba)"
+			},
+			{
+				"ru": "Идти",
+				"en": "Go",
+				"fr": "Aller",
+				"de": "Gehen",
+				"es": "Ir",
+				"cn": "走 (zǒu)",
+				"ar": "مشى (mašā)"
+			},
+			{
+				"ru": "Ждать",
+				"en": "Wait",
+				"fr": "Attendre",
+				"de": "Warten",
+				"es": "Esperar",
+				"cn": "等 (děng)",
+				"ar": "انتظر (intazara)"
+			},
+			{
+				"ru": "Хотеть",
+				"en": "Want",
+				"fr": "Vouloir",
+				"de": "Wollen",
+				"es": "Querer",
+				"cn": "要 (yào)",
+				"ar": "أراد (ʾarāda)"
+			},
+			{
+				"ru": "Открыть",
+				"en": "Open",
+				"fr": "Ouvrir",
+				"de": "Öffnen",
+				"es": "Abrir",
+				"cn": "开 (kāi)",
+				"ar": "فتح (fataḥa)"
+			},
+			{
+				"ru": "Закрыть",
+				"en": "Close",
+				"fr": "Fermer",
+				"de": "Schließen",
+				"es": "Cerrar",
+				"cn": "关 (guān)",
+				"ar": "غلق (ġalaqa)"
+			},
+			{
+				"ru": "Стоять",
+				"en": "Stand",
+				"fr": "Être debout",
+				"de": "Stehen",
+				"es": "Estar de pie",
+				"cn": "站 (zhàn)",
+				"ar": "وقف (waqafa)"
+			},
+			{
+				"ru": "Сидеть",
+				"en": "Sit",
+				"fr": "Être assis",
+				"de": "Sitzen",
+				"es": "Estar sentado",
+				"cn": "坐 (zuò)",
+				"ar": "جلس (jalasa)"
+			},
+			{
+				"ru": "Лежать",
+				"en": "Lie",
+				"fr": "Être couché",
+				"de": "Liegen",
+				"es": "Estar acostado",
+				"cn": "躺 (tǎng)",
+				"ar": "اضطجع (iḍṭajaʿa)"
+			},
+			{
+				"ru": "Лететь",
+				"en": "Fly",
+				"fr": "Voler",
+				"de": "Fliegen",
+				"es": "Volar",
+				"cn": "飞 (fēi)",
+				"ar": "طار (ṭāra)"
+			},
+			{
+				"ru": "Плыть",
+				"en": "Swim",
+				"fr": "Nager",
+				"de": "Schwimmen",
+				"es": "Nadar",
+				"cn": "游泳 (yóuyǒng)",
+				"ar": "سبح (sabaḥa)"
+			},
+			{
+				"ru": "Упасть",
+				"en": "Fall",
+				"fr": "Tomber",
+				"de": "Fallen",
+				"es": "Caer",
+				"cn": "掉 (diào)",
+				"ar": "سقط (saqaṭa)"
+			},
+			{
+				"ru": "Взять",
+				"en": "Take",
+				"fr": "Prendre",
+				"de": "Nehmen",
+				"es": "Tomar",
+				"cn": "拿 (ná)",
+				"ar": "أخذ (ʾaḫaḏa)"
+			},
+			{
+				"ru": "Положить",
+				"en": "Put",
+				"fr": "Mettre",
+				"de": "Legen",
+				"es": "Poner",
+				"cn": "放 (fàng)",
+				"ar": "وضع (waḍaʿa)"
+			},
+			{
+				"ru": "Дать",
+				"en": "Give",
+				"fr": "Donner",
+				"de": "Geben",
+				"es": "Dar",
+				"cn": "给 (gěi)",
+				"ar": "أعطى (ʾaʿṭā)"
+			},
+			{
+				"ru": "Искать",
+				"en": "Search",
+				"fr": "Chercher",
+				"de": "Suchen",
+				"es": "Buscar",
+				"cn": "找 (zhǎo)",
+				"ar": "بحث (baḥaṯa)"
+			},
+			{
+				"ru": "Держать",
+				"en": "Hold / keep",
+				"fr": "Tenir",
+				"de": "Halten",
+				"es": "Sostener",
+				"cn": "拿住 (názhù)",
+				"ar": "أمسك (ʾamsaka)"
+			},
+			{
+				"ru": "Нести",
+				"en": "Carry",
+				"fr": "Porter",
+				"de": "Tragen",
+				"es": "Llevar",
+				"cn": "提 (tí)",
+				"ar": "حمل (ḥamala)"
+			},
+			{
+				"ru": "Мыть",
+				"en": "Wash",
+				"fr": "Laver",
+				"de": "Waschen",
+				"es": "Lavar",
+				"cn": "洗 (xǐ)",
+				"ar": "غسل (ġasala)"
+			},
+			{
+				"ru": "Читать",
+				"en": "Read",
+				"fr": "Lire",
+				"de": "Lesen",
+				"es": "Leer",
+				"cn": "读 (dú)",
+				"ar": "قرأ (qaraʾa)"
+			},
+			{
+				"ru": "Писать",
+				"en": "Write",
+				"fr": "Écrire",
+				"de": "Schreiben",
+				"es": "Escribir",
+				"cn": "写 (xiě)",
+				"ar": "كتب (kataba)"
+			},
+			{
+				"ru": "Говорить",
+				"en": "Speak",
+				"fr": "Parler",
+				"de": "Sprechen",
+				"es": "Hablar",
+				"cn": "说 (shuō)",
+				"ar": "تحدث (taḥaddaṯa)"
+			},
+			{
+				"ru": "Слушать",
+				"en": "Listen",
+				"fr": "Écouter",
+				"de": "Hören",
+				"es": "Escuchar",
+				"cn": "听 (tīng)",
+				"ar": "استمع (istamaʿa)"
+			},
+			{
+				"ru": "Видеть",
+				"en": "See",
+				"fr": "Voir",
+				"de": "Sehen",
+				"es": "Ver",
+				"cn": "看见 (kànjiàn)",
+				"ar": "رأى (raʾā)"
+			},
+			{
+				"ru": "Знать",
+				"en": "Know",
+				"fr": "Savoir",
+				"de": "Wissen",
+				"es": "Saber",
+				"cn": "知道 (zhīdào)",
+				"ar": "عرف (ʿarafa)"
+			},
+			{
+				"ru": "Понимать",
+				"en": "Understand",
+				"fr": "Comprendre",
+				"de": "Verstehen",
+				"es": "Comprender",
+				"cn": "明白 (míngbai)",
+				"ar": "فهم (fahima)"
+			},
+			{
+				"ru": "Терять",
+				"en": "Lose",
+				"fr": "Perdre",
+				"de": "Verlieren",
+				"es": "Perder",
+				"cn": "丢 (diū)",
+				"ar": "فقد (faqada)"
+			},
+			{
+				"ru": "Забыть",
+				"en": "Forget",
+				"fr": "Oublier",
+				"de": "Vergessen",
+				"es": "Olvidar",
+				"cn": "忘记 (wàngjì)",
+				"ar": "نسي (nasiya)"
+			},
+			{
+				"ru": "Делать",
+				"en": "Do / make",
+				"fr": "Faire",
+				"de": "Machen",
+				"es": "Hacer",
+				"cn": "做 (zuò)",
+				"ar": "فعل (faʿala)"
+			},
+			{
+				"ru": "Звонить",
+				"en": "Call",
+				"fr": "Appeler",
+				"de": "Anrufen",
+				"es": "Llamar",
+				"cn": "打电话 (dǎ diànhuà)",
+				"ar": "اتصل (ittaṣala)"
+			},
+			{
+				"ru": "Смотреть",
+				"en": "Watch",
+				"fr": "Regarder",
+				"de": "Schauen",
+				"es": "Mirar",
+				"cn": "看 (kàn)",
+				"ar": "شاهد (šāhada)"
+			},
+			{
+				"ru": "Верить",
+				"en": "Believe",
+				"fr": "Croire",
+				"de": "Glauben",
+				"es": "Creer",
+				"cn": "相信 (xiāngxìn)",
+				"ar": "صدق (ṣaddaqa)"
+			},
+			{
+				"ru": "Жарить",
+				"en": "Fry",
+				"fr": "Frire",
+				"de": "Braten",
+				"es": "Freír",
+				"cn": "炸 (zhá)",
+				"ar": "قلى (qalā)"
+			},
+			{
+				"ru": "Варить",
+				"en": "Boil",
+				"fr": "Bouillir",
+				"de": "Kochen",
+				"es": "Hervir",
+				"cn": "煮 (zhǔ)",
+				"ar": "طبخ (ṭabakha)"
+			},
+			{
+				"ru": "Включить",
+				"en": "Turn on",
+				"fr": "Allumer",
+				"de": "Einschalten",
+				"es": "Encender",
+				"cn": "开 (kāi)",
+				"ar": "شغل (šāġala)"
+			},
+			{
+				"ru": "Выключить",
+				"en": "Turn off",
+				"fr": "Éteindre",
+				"de": "Ausschalten",
+				"es": "Apagar",
+				"cn": "关 (guān)",
+				"ar": "أطفأ (ʾaṭfaʾa)"
+			},
+			{
+				"ru": "Повернуть",
+				"en": "Turn",
+				"fr": "Tourner",
+				"de": "Drehen",
+				"es": "Girar",
+				"cn": "转 (zhuǎn)",
+				"ar": "لف (laffa)"
+			},
+			{
+				"ru": "Бить",
+				"en": "Hit",
+				"fr": "Frapper",
+				"de": "Schlagen",
+				"es": "Golpear",
+				"cn": "打 (dǎ)",
+				"ar": "ضرب (ḍaraba)"
+			},
+			{
+				"ru": "Купить",
+				"en": "Buy",
+				"fr": "Acheter",
+				"de": "Kaufen",
+				"es": "Comprar",
+				"cn": "买 (mǎi)",
+				"ar": "اشترى (ištarā)"
+			},
+			{
+				"ru": "Продать",
+				"en": "Sell",
+				"fr": "Vendre",
+				"de": "Verkaufen",
+				"es": "Vender",
+				"cn": "卖 (mài)",
+				"ar": "باع (bāʿa)"
+			},
+			{
+				"ru": "Просить",
+				"en": "Ask",
+				"fr": "Demander",
+				"de": "Bitten",
+				"es": "Pedir",
+				"cn": "问 (wèn)",
+				"ar": "طلب (ṭalaba)"
+			},
+			{
+				"ru": "Платить",
+				"en": "Pay",
+				"fr": "Payer",
+				"de": "Bezahlen",
+				"es": "Pagar",
+				"cn": "付 (fù)",
+				"ar": "دفع (dafaʿa)"
+			},
+			{
+				"ru": "Бросить",
+				"en": "Throw",
+				"fr": "Jeter",
+				"de": "Werfen",
+				"es": "Lanzar",
+				"cn": "扔 (rēng)",
+				"ar": "رمى (ramā)"
+			},
+			{
+				"ru": "Изменить",
+				"en": "Change",
+				"fr": "Changer",
+				"de": "Wechseln",
+				"es": "Cambiar",
+				"cn": "改变 (gǎibiàn)",
+				"ar": "غير (ġayyara)"
+			},
+			{
+				"ru": "Зарегистрировать",
+				"en": "Register",
+				"fr": "Enregistrer",
+				"de": "Registrieren",
+				"es": "Registrar",
+				"cn": "登记 (dēngjì)",
+				"ar": "سجل (sajjala)"
+			},
+			{
+				"ru": "Петь",
+				"en": "Sing",
+				"fr": "Chanter",
+				"de": "Singen",
+				"es": "Cantar",
+				"cn": "唱 (chàng)",
+				"ar": "غنى (ġannā)"
+			},
+			{
+				"ru": "Играть",
+				"en": "Play",
+				"fr": "Jouer",
+				"de": "Spielen",
+				"es": "Jugar",
+				"cn": "玩 (wán)",
+				"ar": "لعب (laʿiba)"
+			},
+			{
+				"ru": "Прятать",
+				"en": "Hide",
+				"fr": "Cacher",
+				"de": "Verstecken",
+				"es": "Esconder",
+				"cn": "藏 (cáng)",
+				"ar": "أخفى (ʾaḫfā)"
+			},
+			{
+				"ru": "Перевести",
+				"en": "Translate",
+				"fr": "Traduire",
+				"de": "Übersetzen",
+				"es": "Traducir",
+				"cn": "翻译 (fānyì)",
+				"ar": "ترجم (tarjama)"
+			},
+			{
+				"ru": "Выбрать",
+				"en": "Choose / select",
+				"fr": "Choisir",
+				"de": "Wählen",
+				"es": "Elegir",
+				"cn": "选择 (xuǎnzé)",
+				"ar": "اختار (iḫtāra)"
+			},
+			{
+				"ru": "Отменить",
+				"en": "Cancel",
+				"fr": "Annuler",
+				"de": "Ausfallen",
+				"es": "Cancelar",
+				"cn": "取消 (qǔxiāo)",
+				"ar": "ألغى (ʾalġā)"
+			},
+			{
+				"ru": "Чувствовать",
+				"en": "Feel",
+				"fr": "Sentir",
+				"de": "Fühlen",
+				"es": "Sentir",
+				"cn": "感觉 (gǎnjué)",
+				"ar": "شعر (šaʿara)"
+			},
+			{
+				"ru": "Думать",
+				"en": "Think",
+				"fr": "Penser",
+				"de": "Denken",
+				"es": "Pensar",
+				"cn": "想 (xiǎng)",
+				"ar": "فكر (fakkara)"
+			},
+			{
+				"ru": "Работать",
+				"en": "Work",
+				"fr": "Travailler",
+				"de": "Arbeiten",
+				"es": "Trabajar",
+				"cn": "工作 (gōngzuò)",
+				"ar": "عمل (ʿamila)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Еда",
+				"en": "Food",
+				"fr": "Nourriture (f)",
+				"de": "Essen (n)",
+				"es": "Comida (f)",
+				"cn": "食物 (shíwù)",
+				"ar": "طعام (ṭaʿām)"
+			},
+			{
+				"ru": "Курица",
+				"en": "Chicken",
+				"fr": "Poulet (m)",
+				"de": "Hänchen (n)",
+				"es": "Pollo (m)",
+				"cn": "鸡肉 (jīròu)",
+				"ar": "دجاج (dajāj)"
+			},
+			{
+				"ru": "Мясо",
+				"en": "Meat",
+				"fr": "Viande (f)",
+				"de": "Fleisch (n)",
+				"es": "Carne (f)",
+				"cn": "肉 (ròu)",
+				"ar": "لحم (laḥm)"
+			},
+			{
+				"ru": "Рыба",
+				"en": "Fish",
+				"fr": "Poisson (m)",
+				"de": "Fisch (m)",
+				"es": "Pescado (m)",
+				"cn": "鱼 (yú)",
+				"ar": "سمك (samak)"
+			},
+			{
+				"ru": "Картофель",
+				"en": "Potato",
+				"fr": "Pomme de terre (f)",
+				"de": "Kartoffel (f)",
+				"es": "Patata (f)",
+				"cn": "土豆 (tǔdòu)",
+				"ar": "بطاطا (baṭāṭā)"
+			},
+			{
+				"ru": "Макароны",
+				"en": "Pasta",
+				"fr": "Pâtes (f pl)",
+				"de": "Nudeln (f pl)",
+				"es": "Pasta (f)",
+				"cn": "面条 (miàntiáo)",
+				"ar": "معكرونة (maʿkarūna)"
+			},
+			{
+				"ru": "Салат",
+				"en": "Salad",
+				"fr": "Salade (f)",
+				"de": "Salat (m)",
+				"es": "Ensalada (f)",
+				"cn": "沙拉 (shālā)",
+				"ar": "سلطة (salaṭa)"
+			},
+			{
+				"ru": "Суп",
+				"en": "Soup",
+				"fr": "Soupe (f)",
+				"de": "Suppe (f)",
+				"es": "Sopa (f)",
+				"cn": "汤 (tāng)",
+				"ar": "شوربة (šūrba)"
+			},
+			{
+				"ru": "Яйцо",
+				"en": "Egg",
+				"fr": "Œuf (m)",
+				"de": "Ei (n)",
+				"es": "Huevo (m)",
+				"cn": "鸡蛋 (jīdàn)",
+				"ar": "بيض (bayḍ)"
+			},
+			{
+				"ru": "Овощи",
+				"en": "Vegetables",
+				"fr": "Légumes (m pl)",
+				"de": "Gemüse (n)",
+				"es": "Verduras (f pl)",
+				"cn": "蔬菜 (shūcài)",
+				"ar": "خضروات (ḫaḍrawāt)"
+			},
+			{
+				"ru": "Фрукты",
+				"en": "Fruits",
+				"fr": "Fruits (m pl)",
+				"de": "Früchte (f pl)",
+				"es": "Frutas (f pl)",
+				"cn": "水果 (shuǐguǒ)",
+				"ar": "فواكه (fawākih)"
+			},
+			{
+				"ru": "Чай",
+				"en": "Tea",
+				"fr": "Thé (m)",
+				"de": "Tee (m)",
+				"es": "Té (m)",
+				"cn": "茶 (chá)",
+				"ar": "شاي (šāy)"
+			},
+			{
+				"ru": "Кофе",
+				"en": "Coffee",
+				"fr": "Café (m)",
+				"de": "Kaffee (m)",
+				"es": "Café (m)",
+				"cn": "咖啡 (kāfēi)",
+				"ar": "قهوة (qahwa)"
+			},
+			{
+				"ru": "Молоко",
+				"en": "Milk",
+				"fr": "Lait (m)",
+				"de": "Milch (f)",
+				"es": "Leche (f)",
+				"cn": "牛奶 (niúnǎi)",
+				"ar": "حليب (ḥalīb)"
+			},
+			{
+				"ru": "Масло",
+				"en": "Oil / butter",
+				"fr": "Huile (f) / beurre (m)",
+				"de": "Öl (n) / Butter (f)",
+				"es": "Aceite (m) / mantequilla (f)",
+				"cn": "油 (yóu)",
+				"ar": "زيت (zayt)"
+			},
+			{
+				"ru": "Соль",
+				"en": "Salt",
+				"fr": "Sel (m)",
+				"de": "Salz (n)",
+				"es": "Sal (f)",
+				"cn": "盐 (yán)",
+				"ar": "ملح (milḥ)"
+			},
+			{
+				"ru": "Сахар",
+				"en": "Sugar",
+				"fr": "Sucre (m)",
+				"de": "Zucker (m)",
+				"es": "Azúcar (m)",
+				"cn": "糖 (táng)",
+				"ar": "سكر (sukkar)"
+			},
+			{
+				"ru": "Хлеб",
+				"en": "Bread",
+				"fr": "Pain (m)",
+				"de": "Brot (n)",
+				"es": "Pan (m)",
+				"cn": "面包 (miànbāo)",
+				"ar": "خبز (ḫubz)"
+			},
+			{
+				"ru": "Алкоголь",
+				"en": "Alcohol",
+				"fr": "Alcool (m)",
+				"de": "Alkohol (m)",
+				"es": "Alcohol (m)",
+				"cn": "酒 (jiǔ)",
+				"ar": "كحول (kuḥūl)"
+			},
+			{
+				"ru": "Десерт",
+				"en": "Dessert",
+				"fr": "Dessert (m)",
+				"de": "Nachspeise (f)",
+				"es": "Postre (m)",
+				"cn": "甜点 (tiándiǎn)",
+				"ar": "حلوى (ḥalwā)"
+			},
+			{
+				"ru": "Сыр",
+				"en": "Cheese",
+				"fr": "Fromage (m)",
+				"de": "Käse (m)",
+				"es": "Queso (m)",
+				"cn": "奶酪 (nǎilào)",
+				"ar": "جبن (jubn)"
+			},
+			{
+				"ru": "Орех",
+				"en": "Nut",
+				"fr": "Noix (f)",
+				"de": "Nuss (f)",
+				"es": "Nuez (f)",
+				"cn": "坚果 (jiānguǒ)",
+				"ar": "جوز (jawz)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Ложка",
+				"en": "Spoon",
+				"fr": "Cuillère (f)",
+				"de": "Löffel (m)",
+				"es": "Cuchara (f)",
+				"cn": "勺子 (sháozi)",
+				"ar": "ملعقة (milʿaqa)"
+			},
+			{
+				"ru": "Вилка",
+				"en": "Fork",
+				"fr": "Fourchette (f)",
+				"de": "Gabel (f)",
+				"es": "Tenedor (m)",
+				"cn": "叉子 (chāzi)",
+				"ar": "شوكة (šawka)"
+			},
+			{
+				"ru": "Нож",
+				"en": "Knife",
+				"fr": "Couteau (m)",
+				"de": "Messer (n)",
+				"es": "Cuchillo (m)",
+				"cn": "刀 (dāo)",
+				"ar": "سكين (sikkīn)"
+			},
+			{
+				"ru": "Чашка",
+				"en": "Cup",
+				"fr": "Tasse (f)",
+				"de": "Tasse (f)",
+				"es": "Taza (f)",
+				"cn": "杯子 (bēizi)",
+				"ar": "فنجان (finjān)"
+			},
+			{
+				"ru": "Тарелка",
+				"en": "Plate",
+				"fr": "Assiette (f)",
+				"de": "Teller (m)",
+				"es": "Plato (m)",
+				"cn": "盘子 (pánzi)",
+				"ar": "طبق (ṭabaq)"
+			},
+			{
+				"ru": "Салфетка",
+				"en": "Napkin",
+				"fr": "Serviette (f)",
+				"de": "Serviette (f)",
+				"es": "Servilleta (f)",
+				"cn": "餐巾 (cānjīn)",
+				"ar": "منديل (mindīl)"
+			},
+			{
+				"ru": "Бутылка",
+				"en": "Bottle",
+				"fr": "Bouteille (f)",
+				"de": "Flasche (f)",
+				"es": "Botella (f)",
+				"cn": "瓶子 (píngzi)",
+				"ar": "زجاجة (zujāja)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Здравствуйте",
+				"en": "Hello",
+				"fr": "Bonjour",
+				"de": "Guten Tag",
+				"es": "Hola",
+				"cn": "你好 (nǐ hǎo)",
+				"ar": "مرحبًا (marḥaban)"
+			},
+			{
+				"ru": "Спасибо",
+				"en": "Thank you",
+				"fr": "Merci",
+				"de": "Danke",
+				"es": "Gracias",
+				"cn": "谢谢 (xièxie)",
+				"ar": "شكرًا (šukran)"
+			},
+			{
+				"ru": "Пожалуйста",
+				"en": "Please",
+				"fr": "S'il vous plaît",
+				"de": "Bitte",
+				"es": "Por favor",
+				"cn": "请 (qǐng)",
+				"ar": "من فضلك (min faḍlik)"
+			},
+			{
+				"ru": "Извините",
+				"en": "Excuse me / Sorry",
+				"fr": "Pardon",
+				"de": "Entschuldigung",
+				"es": "Perdón",
+				"cn": "对不起 (duìbuqǐ)",
+				"ar": "عذرًا (ʿuḏran)"
+			},
+			{
+				"ru": "До свидания",
+				"en": "Goodbye",
+				"fr": "Au revoir",
+				"de": "Auf Wiedersehen",
+				"es": "Adiós",
+				"cn": "再见 (zàijiàn)",
+				"ar": "وداعًا (wadāʿan)"
+			},
+			{
+				"ru": "Как дела?",
+				"en": "How are you?",
+				"fr": "Comment ça va?",
+				"de": "Wie geht's?",
+				"es": "¿Cómo estás?",
+				"cn": "你好吗？(nǐ hǎo ma?)",
+				"ar": "كيف حالك؟ (kayfa ḥāluk?)"
+			},
+			{
+				"ru": "Хорошо",
+				"en": "Good",
+				"fr": "Bien",
+				"de": "Gut",
+				"es": "Bien",
+				"cn": "好 (hǎo)",
+				"ar": "بخير (biḫayr)"
+			},
+			{
+				"ru": "Плохо",
+				"en": "Bad",
+				"fr": "Mal",
+				"de": "Schlecht",
+				"es": "Mal",
+				"cn": "不好 (bù hǎo)",
+				"ar": "سيء (sayyiʾ)"
+			},
+			{
+				"ru": "Понятно",
+				"en": "OK",
+				"fr": "Compris",
+				"de": "Klar",
+				"es": "Entendido",
+				"cn": "明白 (míngbai)",
+				"ar": "فهِمْت (fahint)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Человек",
+				"en": "Person",
+				"fr": "Personne (f)",
+				"de": "Mensch (m)",
+				"es": "Persona (f)",
+				"cn": "人 (rén)",
+				"ar": "شخص (šaḫṣ)"
+			},
+			{
+				"ru": "Рука",
+				"en": "Hand / Arm",
+				"fr": "Main (f) / Bras (m)",
+				"de": "Hand (f) / Arm (m)",
+				"es": "Mano (f) / Brazo (m)",
+				"cn": "手 (shǒu)",
+				"ar": "يد (yad)"
+			},
+			{
+				"ru": "Нога",
+				"en": "Leg / Foot",
+				"fr": "Jambe (f) / Pied (m)",
+				"de": "Bein (n) / Fuß (m)",
+				"es": "Pierna (f) / Pie (m)",
+				"cn": "脚 (jiǎo)",
+				"ar": "رجل (rijl)"
+			},
+			{
+				"ru": "Лицо",
+				"en": "Face",
+				"fr": "Visage (m)",
+				"de": "Gesicht (n)",
+				"es": "Cara (f)",
+				"cn": "脸 (liǎn)",
+				"ar": "وجه (wajh)"
+			},
+			{
+				"ru": "Живот",
+				"en": "Stomach",
+				"fr": "Ventre (m)",
+				"de": "Bauch (m)",
+				"es": "Vientre (m)",
+				"cn": "肚子 (dùzi)",
+				"ar": "بطن (baṭn)"
+			},
+			{
+				"ru": "Нос",
+				"en": "Nose",
+				"fr": "Nez (m)",
+				"de": "Nase (f)",
+				"es": "Nariz (f)",
+				"cn": "鼻子 (bízi)",
+				"ar": "أنف (ʾanf)"
+			},
+			{
+				"ru": "Глаз",
+				"en": "Eye",
+				"fr": "Œil (m)",
+				"de": "Auge (n)",
+				"es": "Ojo (m)",
+				"cn": "眼睛 (yǎnjīng)",
+				"ar": "عين (ʿayn)"
+			},
+			{
+				"ru": "Рот",
+				"en": "Mouth",
+				"fr": "Bouche (f)",
+				"de": "Mund (m)",
+				"es": "Boca (f)",
+				"cn": "嘴巴 (zuǐba)",
+				"ar": "فم (fam)"
+			},
+			{
+				"ru": "Ухо",
+				"en": "Ear",
+				"fr": "Oreille (f)",
+				"de": "Ohr (n)",
+				"es": "Oreja (f)",
+				"cn": "耳朵 (ěrduo)",
+				"ar": "أذن (ʾuḏun)"
+			},
+			{
+				"ru": "Губы",
+				"en": "Lips",
+				"fr": "Lèvres (f pl)",
+				"de": "Lippen (f pl)",
+				"es": "Labios (m pl)",
+				"cn": "嘴唇 (zuǐchún)",
+				"ar": "شفاه (šifāh)"
+			},
+			{
+				"ru": "Волосы",
+				"en": "Hair",
+				"fr": "Cheveux (m pl)",
+				"de": "Haare (n pl)",
+				"es": "Pelo (m)",
+				"cn": "头发 (tóufà)",
+				"ar": "شعر (šaʿr)"
+			},
+			{
+				"ru": "Спина",
+				"en": "Back",
+				"fr": "Dos (m)",
+				"de": "Rücken (m)",
+				"es": "Espalda (f)",
+				"cn": "背 (bèi)",
+				"ar": "ظهر (ẓahr)"
+			},
+			{
+				"ru": "Зуб",
+				"en": "Tooth",
+				"fr": "Dent (f)",
+				"de": "Zahn (m)",
+				"es": "Diente (m)",
+				"cn": "牙齿 (yáchǐ)",
+				"ar": "سن (sinn)"
+			},
+			{
+				"ru": "Палец",
+				"en": "Finger",
+				"fr": "Doigt (m)",
+				"de": "Finger (m)",
+				"es": "Dedo (m)",
+				"cn": "手指 (shǒuzhǐ)",
+				"ar": "إصبع (ʾiṣbaʿ)"
+			},
+			{
+				"ru": "Голова",
+				"en": "Head",
+				"fr": "Tête (f)",
+				"de": "Kopf (m)",
+				"es": "Cabeza (f)",
+				"cn": "头 (tóu)",
+				"ar": "رأس (raʾs)"
+			},
+			{
+				"ru": "Сердце",
+				"en": "Heart",
+				"fr": "Cœur (m)",
+				"de": "Herz (n)",
+				"es": "Corazón (m)",
+				"cn": "心 (xīn)",
+				"ar": "قلب (qalb)"
+			},
+			{
+				"ru": "",
+				"en": "",
+				"fr": "",
+				"de": "",
+				"es": "",
+				"cn": "",
+				"ar": ""
+			},
+			{
+				"ru": "Вещь",
+				"en": "Thing",
+				"fr": "Chose (f)",
+				"de": "Ding (n)",
+				"es": "Cosa (f)",
+				"cn": "东西 (dōngxi)",
+				"ar": "شيء (šayʾ)"
+			},
+			{
+				"ru": "Одежда",
+				"en": "Clothes",
+				"fr": "Vêtements (m pl)",
+				"de": "Kleidung (f)",
+				"es": "Ropa (f)",
+				"cn": "衣服 (yīfú)",
+				"ar": "ملابس (malābis)"
+			},
+			{
+				"ru": "Паспорт",
+				"en": "Passport",
+				"fr": "Passeport (m)",
+				"de": "Reisepass (m)",
+				"es": "Pasaporte (m)",
+				"cn": "护照 (hùzhào)",
+				"ar": "جواز سفر (jawāz safar)"
+			},
+			{
+				"ru": "Сумка",
+				"en": "Bag",
+				"fr": "Sac (m)",
+				"de": "Tasche (f)",
+				"es": "Bolso (m)",
+				"cn": "包 (bāo)",
+				"ar": "حقيبة (ḥaqība)"
+			},
+			{
+				"ru": "Деньги",
+				"en": "Money",
+				"fr": "Argent (m)",
+				"de": "Geld (n)",
+				"es": "Dinero (m)",
+				"cn": "钱 (qián)",
+				"ar": "مال (māl)"
+			},
+			{
+				"ru": "Билет",
+				"en": "Ticket",
+				"fr": "Billet (m)",
+				"de": "Ticket (n)",
+				"es": "Billete (m)",
+				"cn": "票 (piào)",
+				"ar": "تذكرة (taḏkira)"
+			},
+			{
+				"ru": "Очки",
+				"en": "Glasses",
+				"fr": "Lunettes (f pl)",
+				"de": "Brille (f)",
+				"es": "Gafas (f pl)",
+				"cn": "眼镜 (yǎnjìng)",
+				"ar": "نظارات (naẓẓārāt)"
+			},
+			{
+				"ru": "Книга",
+				"en": "Book",
+				"fr": "Livre (m)",
+				"de": "Buch (n)",
+				"es": "Libro (m)",
+				"cn": "书 (shū)",
+				"ar": "كتاب (kitāb)"
+			},
+			{
+				"ru": "Телефон",
+				"en": "Phone",
+				"fr": "Téléphone (m) / portable (m)",
+				"de": "Handy (n)",
+				"es": "Teléfono (m)",
+				"cn": "电话 (diànhuà)",
+				"ar": "هاتف (hātif)"
+			},
+			{
+				"ru": "Компьютер",
+				"en": "Computer",
+				"fr": "Ordinateur (m)",
+				"de": "Computer (m)",
+				"es": "Ordenador (m)",
+				"cn": "电脑 (diànnǎo)",
+				"ar": "حاسوب (ḥāsūb)"
+			},
+			{
+				"ru": "Бумага",
+				"en": "Paper",
+				"fr": "Papier (m)",
+				"de": "Papier (n)",
+				"es": "Papel (m)",
+				"cn": "纸 (zhǐ)",
+				"ar": "ورق (waraq)"
+			},
+			{
+				"ru": "Карандаш",
+				"en": "Pencil",
+				"fr": "Crayon (m)",
+				"de": "Bleistift (m)",
+				"es": "Lápiz (m)",
+				"cn": "铅笔 (qiānbǐ)",
+				"ar": "قلم رصاص (qalam raṣāṣ)"
+			},
+			{
+				"ru": "Страховка",
+				"en": "Insurance",
+				"fr": "Assurance (f)",
+				"de": "Versicherung (f)",
+				"es": "Seguro (m)",
+				"cn": "保险 (bǎoxiǎn)",
+				"ar": "تأمين (taʾmīn)"
+			},
+			{
+				"ru": "Коробка",
+				"en": "Box",
+				"fr": "Boîte (f)",
+				"de": "Karton (m)",
+				"es": "Caja (f)",
+				"cn": "盒子 (hézi)",
+				"ar": "صندوق (ṣundūq)"
+			},
+			{
+				"ru": "Часы",
+				"en": "Watch / Clock",
+				"fr": "Montre (f)",
+				"de": "Uhr (f)",
+				"es": "Reloj (m)",
+				"cn": "手表 (shǒubiǎo)",
+				"ar": "ساعة (sāʿa)"
+			},
+			{
+				"ru": "Подарок",
+				"en": "Gift",
+				"fr": "Cadeau (m)",
+				"de": "Geschenk (n)",
+				"es": "Regalo (m)",
+				"cn": "礼物 (lǐwù)",
+				"ar": "هدية (hadiyya)"
+			},
+			{
+				"ru": "Зонт",
+				"en": "Umbrella",
+				"fr": "Parapluie (m)",
+				"de": "Regenschirm (m)",
+				"es": "Paraguas (m)",
+				"cn": "伞 (sǎn)",
+				"ar": "مظلة (miẓalla)"
+			}
+        ]
+    }
+    </script>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="33%" id="left-header">Русский</th>
+				<th width="34%" id="center-header">Английский</th>
+                <th width="33%" id="right-header">Французский</th>
+            </tr>
+        </thead>
+        <tbody id="words-table">
+            <!-- Таблица заполнится через JavaScript -->
+        </tbody>
+    </table>
+	<footer class="footer-minimal">
+		<p>2026 © danielmorovov.github.com</p>
+	</footer>
+	<script>
+		// Получаем данные из JSON тега ПЕРЕД любыми событиями
+		const jsonElement = document.getElementById('dictionary-json');
+		const dictionaryData = JSON.parse(jsonElement.textContent);
+		
+		let leftLanguage = 'ru';
+		let centerLanguage = 'en';
+		let rightLanguage = 'fr';
+
+		// Надёжная инициализация (не пропустит DOMContentLoaded)
+		function initializeApp() {
+			const leftSelect = document.getElementById('left-language');
+			const centerSelect = document.getElementById('center-language');
+			const rightSelect = document.getElementById('right-language');
+			
+			// Очищаем на всякий случай
+			leftSelect.innerHTML = '';
+			centerSelect.innerHTML = '';
+			rightSelect.innerHTML = '';
+			
+			for (const [code, name] of Object.entries(dictionaryData.languages)) {
+				// Левый селект
+				const leftOption = document.createElement('option');
+				leftOption.value = code;
+				leftOption.textContent = `${name} (${code.toUpperCase()})`;
+				if (code === 'ru') leftOption.selected = true;
+				leftSelect.appendChild(leftOption);
+				
+				// Центр селект
+				const centerOption = document.createElement('option');
+				centerOption.value = code;
+				centerOption.textContent = `${name} (${code.toUpperCase()})`;
+				if (code === 'en') centerOption.selected = true;
+				centerSelect.appendChild(centerOption);
+				
+				// Правый селект
+				const rightOption = document.createElement('option');
+				rightOption.value = code;
+				rightOption.textContent = `${name} (${code.toUpperCase()})`;
+				if (code === 'fr') rightOption.selected = true;
+				rightSelect.appendChild(rightOption);
+			}
+			
+			// Обработчики событий
+			leftSelect.addEventListener('change', function(e) {
+				leftLanguage = e.target.value;
+				updateTable();
+			});
+			
+			centerSelect.addEventListener('change', function(e) {
+				centerLanguage = e.target.value;
+				updateTable();
+			});
+			
+			rightSelect.addEventListener('change', function(e) {
+				rightLanguage = e.target.value;
+				updateTable();
+			});
+			
+			updateTable();
+		}
+		
+		function updateTable() {
+			const tableBody = document.getElementById('words-table');
+			const leftHeader = document.getElementById('left-header');
+			const centerHeader = document.getElementById('center-header');
+			const rightHeader = document.getElementById('right-header');
+			
+			leftHeader.textContent = dictionaryData.languages[leftLanguage];
+			centerHeader.textContent = dictionaryData.languages[centerLanguage];
+			rightHeader.textContent = dictionaryData.languages[rightLanguage];
+			
+			tableBody.innerHTML = '';
+			
+            // Счетчик последовательных пустых строк
+            let consecutiveEmptyRows = 0;
+
+			dictionaryData.words.forEach(word => {
+				const leftWord = word[leftLanguage] || '';
+				const centerWord = word[centerLanguage] || '';
+				const rightWord = word[rightLanguage] || '';
+				
+                // Проверяем, пустая ли вся строка
+                const isEmptyRow = leftWord === '' && centerWord === '' && rightWord === '';
+
+                if (isEmptyRow) {
+                    consecutiveEmptyRows++;
+                    
+                    const emptyRow = document.createElement('tr');
+                    
+                    // Для двойных пустых строк (и более) используем специальный класс
+                    if (consecutiveEmptyRows >= 2) {
+                        emptyRow.className = 'double-empty-row';
+                    } else {
+                        emptyRow.className = 'empty-row';
+                    }
+                    
+                    emptyRow.innerHTML = '<td colspan="3"></td>';
+                    tableBody.appendChild(emptyRow);
+                } else {
+                    // Сбрасываем счетчик, если встретили непустую строку
+                    consecutiveEmptyRows = 0;
+
+                    const row = document.createElement('tr');
+                    const leftCell = document.createElement('td');
+                    leftCell.textContent = leftWord || '-';
+                    if (leftWord === '') leftCell.className = 'empty-cell';
+                    
+                    const centerCell = document.createElement('td');
+                    centerCell.textContent = centerWord || '-';
+                    if (centerWord === '') centerCell.className = 'empty-cell';
+                    
+                    const rightCell = document.createElement('td');
+                    rightCell.textContent = rightWord || '-';
+                    if (rightWord === '') rightCell.className = 'empty-cell';
+                    
+                    row.appendChild(leftCell);
+                    row.appendChild(centerCell);
+                    row.appendChild(rightCell);
+                    tableBody.appendChild(row);
+                }
+            });
+        }
+		
+		// Запуск: проверяем готовность DOM
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initializeApp);
+		} else {
+			initializeApp();
+		}
+		
+		// Для отладки
+		window.dictionaryData = dictionaryData;
+		console.log('ready');
+	</script>
+</body>
+</html>
