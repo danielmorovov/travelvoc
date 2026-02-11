@@ -80,6 +80,103 @@
             font-size: 13px;
 			color: #6c757d;
         }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 22px;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+            
+            /* Селекторы в строку над своими колонками */
+            .language-selectors {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 5px;
+                padding: 10px 0px 8px 0px;
+                background: #7ccbff;
+                box-shadow: 0 2px 5px #4b79978c;
+				position: sticky;        /* Липкое позиционирование */
+            	top: 0;                 /* Прилипает к верхнему краю */
+            	z-index: 1000;			/* Поверх других элементов */
+            }
+            
+            .language-selector {
+                flex: 1;
+                min-width: 0; /* Позволяет flex-элементам сжиматься */
+                padding: 0 2px;
+            }
+            
+            .language-selector label {
+                font-size: 11px;
+                margin-bottom: 3px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            select {
+                width: 100%;
+                min-width: 0;
+                padding: 8px 5px;
+                font-size: 13px;
+                background: white;
+                border: 1px solid #2dabff;
+                border-radius: 6px;
+                font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* Таблица на всю ширину */
+            table {
+                width: 100%;
+                margin-top: 15px;
+                font-size: 14px;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+            
+            th {
+                padding: 8px 5px;
+                font-size: 14px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            td {
+                padding: 8px 5px;
+                font-size: 14px;
+                word-break: break-word;
+            }
+            
+            @media screen and (max-width: 480px) {
+                th {
+                    font-size: 12px;
+                    padding: 6px 3px;
+                }
+                
+                td {
+                    font-size: 12px;
+                    padding: 6px 3px;
+                }
+                
+                select {
+                    font-size: 12px;
+                    padding: 6px 3px;
+                }
+                
+                .language-selector label {
+                    font-size: 10px;
+                }
     </style>
 </head>
 <body>
@@ -4153,4 +4250,5 @@
 		console.log('ready');
 	</script>
 </body>
+
 </html>
